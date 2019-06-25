@@ -30,7 +30,7 @@ public class MyRobot extends WeChatBot {
     }
 
     /**
-     * 消息监听
+     * 监听好友/群文本类消息
      * @param message
      */
     @Bind(msgType = MsgType.TEXT)//默认监听好友/群文本类消息
@@ -84,6 +84,21 @@ public class MyRobot extends WeChatBot {
             }
             sb.append("【异常类:】").append(e.getClass().toString()).append("\n");
             sb.append("【异常信息:】").append(e.getMessage()).append("\n");
+            this.sendMsgToFileHelper(sb.toString());
+        }
+    }
+
+    /**
+     * 监听添加好友消息
+     * @param message
+     */
+    @Bind(msgType = MsgType.ADD_FRIEND)
+    public void addFriend(WeChatMessage message) {
+        if(message.getText().contains("嗨淘")) {
+            this.api().verify(message.getRaw().getRecommend());
+            StringBuffer sb = new StringBuffer();
+            sb.append("【微信昵称:】").append(message.getFromNickName() == null ? "未知" : message.getFromNickName()).append("\n");
+            sb.append("添加好友");
             this.sendMsgToFileHelper(sb.toString());
         }
     }
