@@ -219,21 +219,20 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             sb.append("【优惠券】").append(couponInfo).append("\n");
                             //电脑下单地址
                             sb.append("【电脑下单地址】\n").append(shortUrl).append("\n");
-                            sb.append("---------------\n");
+                            sb.append("------------------------------\n");
                             //淘口令
                             sb.append("手机復·制这段信息,").append(tpwd);
                             sb.append("打开【淘♂寳♀】领取优惠券并下单!\n");
                         }else {
                             //电脑下单地址
                             sb.append("【电脑下单地址】\n").append(shortUrl).append("\n");
-                            sb.append("--------------------\n");
+                            sb.append("------------------------------\n");
                             //淘口令
                             sb.append("手机復·制这段信息,").append(tpwd);
                             sb.append("打开【淘♂寳♀】点击淘口令下单!\n");
                         }
-                        sb.append("--------------------\n");
-                        sb.append("【推广福利】发送订单详情截图马上收到返利红包!!!");
-                        sb.append("--------------------\n");
+                        sb.append("------------------------------\n");
+                        sb.append("【推广福利】发送订单截图立刻获得返利红包!");
                         return sb.toString();
                     }
                 }

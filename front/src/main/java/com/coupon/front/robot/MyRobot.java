@@ -71,39 +71,20 @@ public class MyRobot extends WeChatBot {
             }
         }catch (Exception e) {
             e.printStackTrace();
-            log.info("查询出错:"+e.getMessage());
-        }
-    }
-
-    /**
-     * 图片
-     * @param message
-     */
-    @Bind(msgType = MsgType.IMAGE)
-    public void handleImageMessage(WeChatMessage message) {
-        try {
-            if(StringUtils.isNotBlank(message.getFromUserName())) {
-                this.sendMsg(message.getFromUserName(), "收到图片啦!");
+            //发生异常,给文件传输工具发微信,通知开发者
+            StringBuffer sb = new StringBuffer();
+            if(StringUtils.isNotBlank(message.getFromNickName())) {
+                sb.append("【微信昵称:】").append(message.getFromNickName()).append("\n");
             }
-        }catch (Exception e) {
-            e.printStackTrace();
-            log.info("查询出错:"+e.getMessage());
-        }
-    }
-
-    /**
-     * 分享
-     * @param message
-     */
-    @Bind(msgType = MsgType.SHARE)
-    public void handleImageShare(WeChatMessage message) {
-        try {
-            if(StringUtils.isNotBlank(message.getFromUserName())) {
-                this.sendMsg(message.getFromUserName(), "等会看分享~");
+            if(StringUtils.isNotBlank(message.getFromRemarkName())) {
+                sb.append("【微信备注:】").append(message.getFromRemarkName()).append("\n");
             }
-        }catch (Exception e) {
-            e.printStackTrace();
-            log.info("查询出错:"+e.getMessage());
+            if(StringUtils.isNotBlank(message.getText())) {
+                sb.append("【信息主体:】").append(message.getText()).append("\n");
+            }
+            sb.append("【异常类:】").append(e.getClass().toString()).append("\n");
+            sb.append("【异常信息:】").append(e.getMessage()).append("\n");
+            this.sendMsgToFileHelper(sb.toString());
         }
     }
 }
