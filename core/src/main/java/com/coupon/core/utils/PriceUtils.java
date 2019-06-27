@@ -58,15 +58,21 @@ public class PriceUtils {
         /**
          * 返利用户规则;
          * 所得佣金都需要乘0.8的系数,因为淘宝会抽成技术服务费以及个税等;
-         * 【1】 0.50元 >= 所得返利 > 0元, 返利系数 1.0;
-         * 【2】 5.00元 >= 所得返利 > 0.50元, 返利系数 0.8;
-         * 【3】 50.00元 >= 所得返利 > 5.00元, 返利系数 0.7;
-         * 【3】 所得返利 > 50.00元, 返利系数 0.6;
+         * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
+         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
+         * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.85;
+         * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.8;
+         * 【5】 所得返利 > 50.00元, 返利系数 0.75;
          */
         BigDecimal fiftyRatio = new BigDecimal("50.00");
+        BigDecimal twentyRatio = new BigDecimal("20.00");
         BigDecimal fiveRatio = new BigDecimal("5.00");
         BigDecimal oneRatio = new BigDecimal("1.00");
+
+        BigDecimal zeroNineRatio = new BigDecimal("0.90");
+        BigDecimal zeroEightFiveRatio = new BigDecimal("0.85");
         BigDecimal zeroEightRatio = new BigDecimal("0.80");
+        BigDecimal zeroSevenFiveRatio = new BigDecimal("0.75");
         BigDecimal zeroSevenRatio = new BigDecimal("0.70");
         BigDecimal zeroSixRatio = new BigDecimal("0.60");
         BigDecimal zeroFiveRatio = new BigDecimal("0.50");
@@ -75,21 +81,25 @@ public class PriceUtils {
         BigDecimal ratePrice = finalPrice.multiply(bMaxCommissionRate).multiply(ratio);
         //预返利金额
         BigDecimal customPrice = ratePrice.multiply(zeroEightRatio);
-        //0.50元 >= 所得返利 > 0元, 返利系数 1.0;
-        if(customPrice.compareTo(zeroRatio) > 0 && customPrice.compareTo(zeroFiveRatio) <= 0) {
+        //【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
+        if(customPrice.compareTo(zeroRatio) > 0 && customPrice.compareTo(oneRatio) <= 0) {
             rebatePrice = customPrice.multiply(oneRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //5.00元 >= 所得返利 > 0.50元, 返利系数 0.8;
-        if(customPrice.compareTo(zeroFiveRatio) > 0 && customPrice.compareTo(fiveRatio) <= 0) {
+        //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
+        if(customPrice.compareTo(oneRatio) > 0 && customPrice.compareTo(fiveRatio) <= 0) {
+            rebatePrice = customPrice.multiply(zeroNineRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.85;
+        if(customPrice.compareTo(fiveRatio) > 0 && customPrice.compareTo(twentyRatio) <= 0) {
+            rebatePrice = customPrice.multiply(zeroEightFiveRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.8;
+        if(customPrice.compareTo(twentyRatio) > 0 && customPrice.compareTo(fiftyRatio) <= 0) {
             rebatePrice = customPrice.multiply(zeroEightRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //50.00元 >= 所得返利 > 5.00元, 返利系数 0.7;
-        if(customPrice.compareTo(fiveRatio) > 0 && customPrice.compareTo(fiftyRatio) <= 0) {
-            rebatePrice = customPrice.multiply(zeroSevenRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        }
-        //所得返利 > 50.00元, 返利系数 0.6;
+        //【5】 所得返利 > 50.00元, 返利系数 0.75;
         if(customPrice.compareTo(fiftyRatio) > 0) {
-            rebatePrice = customPrice.multiply(zeroSixRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = customPrice.multiply(zeroSevenFiveRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         return rebatePrice;
     }
