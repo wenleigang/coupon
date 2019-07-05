@@ -42,7 +42,8 @@ public class MyRobot extends WeChatBot {
             if(StringUtils.isNotBlank(message.getFromUserName())) {
                 //微信消息文本内容
                 String textInfo = message.getText();
-                if(TbkUtils.hasTpwdcode(textInfo)) {//1.淘口令类型【淘宝商品分享链接文字包含有淘口令查询优惠】
+                String pattern = TbkUtils.hasTpwdcode(textInfo);
+                if(pattern != null) {//1.淘口令类型【淘宝商品分享链接文字包含有淘口令查询优惠】
                     //发送提示消息
                     this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
                     String couponMessage = miaoYouJuanService.getitemgyurlbytpwd(textInfo);

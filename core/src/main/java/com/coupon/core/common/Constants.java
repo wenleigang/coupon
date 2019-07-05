@@ -89,6 +89,9 @@ public interface Constants {
     //高佣转链接API(淘口令)
     String GY_TPWD = TBK_URL+"/getitemgyurlbytpwd?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&tpwdcode=";
 
+    //高佣转链接API(商品ID)
+    String GY_ITEMID = TBK_URL+"/getitemgyurl?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&itemid=";
+
     //获取简版淘客商品信息API
     String ITEM_INFO = TBK_URL+"/getiteminfo?apkey="+MYJ_APKEY+"&itemid=";
 

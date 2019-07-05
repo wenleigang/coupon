@@ -1,5 +1,7 @@
 package com.coupon.business.service;
 
+import java.util.Map;
+
 /**
  * @ProjectName: workspace_coupon
  * @Package: com.coupon.business.service
@@ -20,4 +22,6 @@ public interface MiaoYouJuanService {
     //万能高佣转链API(任意文字分享格式)
     String getgyurlbyall(String textInfo) throws Exception;
 
+    ////获取简版淘客商品信息
+    Map<String,Object> getiteminfo(String goodsId) throws Exception;
 }

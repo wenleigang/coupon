@@ -25,14 +25,32 @@ public class TbkUtils {
      * @param textInfo
      * @return
      */
-    public static boolean hasTpwdcode(String textInfo) {
-        String regex = "￥([a-zA-Z0-9]{11})￥";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(textInfo);
-        if (m.find()) {
-            return true;
+    public static String hasTpwdcode(String textInfo) {
+        String regex1 = "\\￥([a-zA-Z0-9]{11})\\￥";
+        String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
+        String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
+        String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
+        Pattern p1 = Pattern.compile(regex1);
+        Matcher m1 = p1.matcher(textInfo);
+        if(m1.find()) {
+            return "￥";
         }
-        return false;
+        Pattern p2 = Pattern.compile(regex2);
+        Matcher m2 = p2.matcher(textInfo);
+        if(m2.find()) {
+            return "€";
+        }
+        Pattern p3 = Pattern.compile(regex3);
+        Matcher m3 = p3.matcher(textInfo);
+        if(m3.find()) {
+            return "$";
+        }
+        Pattern p4 = Pattern.compile(regex4);
+        Matcher m4 = p4.matcher(textInfo);
+        if(m4.find()) {
+            return "&";
+        }
+        return null;
     }
 
     /**
@@ -40,14 +58,32 @@ public class TbkUtils {
      * @param textInfo
      * @return
      */
-    public static boolean isTpwdcode(String textInfo) {
-        String regex = "￥([a-zA-Z0-9]{11})￥";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(textInfo);
-        if (m.matches()) {
-            return true;
+    public static String isTpwdcode(String textInfo) {
+        String regex1 = "\\￥([a-zA-Z0-9]{11})\\￥";
+        String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
+        String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
+        String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
+        Pattern p1 = Pattern.compile(regex1);
+        Matcher m1 = p1.matcher(textInfo);
+        if(m1.matches()) {
+            return "￥";
         }
-        return false;
+        Pattern p2 = Pattern.compile(regex2);
+        Matcher m2 = p2.matcher(textInfo);
+        if(m2.matches()) {
+            return "€";
+        }
+        Pattern p3 = Pattern.compile(regex3);
+        Matcher m3 = p3.matcher(textInfo);
+        if(m3.matches()) {
+            return "$";
+        }
+        Pattern p4 = Pattern.compile(regex4);
+        Matcher m4 = p4.matcher(textInfo);
+        if(m4.matches()) {
+            return "&";
+        }
+        return null;
     }
 
     /**
@@ -77,8 +113,14 @@ public class TbkUtils {
     public static String extractTpwdcode(String itemShareInfo) {
         String tpwdcode = "";
         if(StringUtils.isNotBlank(itemShareInfo)) {
-            if(hasTpwdcode(itemShareInfo)) {
-                tpwdcode = "￥"+itemShareInfo.split("￥")[1]+"￥";
+            String pattern = hasTpwdcode(itemShareInfo);
+            String splitTag = pattern;
+            //特殊符号转义
+            if(pattern == "$") {
+                splitTag = "\\$";
+            }
+            if(pattern != null) {
+                tpwdcode = pattern+itemShareInfo.split(splitTag)[1]+pattern;
             }
         }
         return tpwdcode;
