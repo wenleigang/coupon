@@ -30,6 +30,7 @@ public class TbkUtils {
         String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
         String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
         String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
+        String regex5 = "\\₤([a-zA-Z0-9]{11})\\₤";
         Pattern p1 = Pattern.compile(regex1);
         Matcher m1 = p1.matcher(textInfo);
         if(m1.find()) {
@@ -50,6 +51,11 @@ public class TbkUtils {
         if(m4.find()) {
             return "&";
         }
+        Pattern p5 = Pattern.compile(regex5);
+        Matcher m5 = p5.matcher(textInfo);
+        if(m5.find()) {
+            return "₤";
+        }
         return null;
     }
 
@@ -63,6 +69,7 @@ public class TbkUtils {
         String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
         String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
         String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
+        String regex5 = "\\₤([a-zA-Z0-9]{11})\\₤";
         Pattern p1 = Pattern.compile(regex1);
         Matcher m1 = p1.matcher(textInfo);
         if(m1.matches()) {
@@ -82,6 +89,11 @@ public class TbkUtils {
         Matcher m4 = p4.matcher(textInfo);
         if(m4.matches()) {
             return "&";
+        }
+        Pattern p5 = Pattern.compile(regex5);
+        Matcher m5 = p5.matcher(textInfo);
+        if(m5.find()) {
+            return "₤";
         }
         return null;
     }

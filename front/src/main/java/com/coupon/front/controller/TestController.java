@@ -111,7 +111,7 @@ public class TestController {
         String textInfo1 = "【顺艺衣架成人防滑衣架10只装家用晾衣架衣撑衣服撑子裙裤架衣服架】https://m.tb.cn/h.eTMZgds?sm=c496f6 点击链接，再选择浏览器咑閞；或復·制这段描述￥xo4cYT8q3Jb￥后到淘♂寳♀";
         String textInfo2 = "【顺艺衣架成人防滑衣架10只装家用晾衣架衣撑衣服撑子裙裤架衣服架】https://m.tb.cn/h.eTMZgds?sm=c496f6 点击链接，再选择浏览器咑閞；或復·制这段描述€xo4cYT8q3Jb€后到淘♂寳♀";
         String textInfo3 = "【顺艺衣架成人防滑衣架10只装家用晾衣架衣撑衣服撑子裙裤架衣服架】https://m.tb.cn/h.eTMZgds?sm=c496f6 点击链接，再选择浏览器咑閞；或復·制这段描述$xo4cYT8q3Jb$后到淘♂寳♀";
-        String textInfo4 = "【顺艺衣架成人防滑衣架10只装家用晾衣架衣撑衣服撑子裙裤架衣服架】https://m.tb.cn/h.eTMZgds?sm=c496f6 点击链接，再选择浏览器咑閞；或復·制这段描述&xo4cYT8q3Jb&后到淘♂寳♀";
+        String textInfo4 = "【顺艺衣架成人防滑衣架10只装家用晾衣架衣撑衣服撑子裙裤架衣服架】https://m.tb.cn/h.eTMZgds?sm=c496f6 点击链接，再选择浏览器咑閞；或復·制这段描述₤xo4cYT8q3Jb₤后到淘♂寳♀";
         String s1 = TbkUtils.hasTpwdcode(textInfo1);
         if(s1 != null) {
             String tpwdcode = TbkUtils.extractTpwdcode(textInfo1);
