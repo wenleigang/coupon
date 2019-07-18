@@ -86,29 +86,29 @@
             <div class="c_info_text c_center_text">-----图文详情参见淘宝商品详情-----</div>
 
             <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
-            <div id="canvasToImageDiv" style="display: none; width: 1000px;">
+            <div id="canvasToImageDiv" class="canvasToImageDiv">
                 <div id="postInfo">
                     <div>
-                        <img id="postImg" width="100%">
+                        <img id="postImg" class="postImg">
                     </div>
-                    <div style="overflow: auto; background-color: #ffffff;">
-                        <div style="float: left; width: 550px; padding: 37px 15px;">
-                            <div id="postTitle" style="font-size: 40px; font-weight: bold;"></div>
-                            <span id="postNowPriceTag" style="color: #ed6d27; font-size: 50px;"></span>
-                            <span id="postNowPrice" style="color: #ed6d27; font-size: 70px;"></span><br/>
-                            <span style="color: #8c8c8c; font-size: 40px;">原价￥</span>
-                            <span id="postReservePrice" style="color: #8c8c8c; font-size: 40px;" class="c_info_disable"></span><br/>
-                            <span id="postCoupon" style="display: none;">
-                                <span style="background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;">劵</span>
-                                <span id="postCouponInfo" style="background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;"></span>
+                    <div class="postInfo">
+                        <div class="postInfoOne">
+                            <div class="postTitle" id="postTitle"></div>
+                            <span class="postNowPriceTag" id="postNowPriceTag"></span>
+                            <span class="postNowPrice" id="postNowPrice"></span><br/>
+                            <span class="postReservePriceTag">原价￥</span>
+                            <span id="postReservePrice" class="postReservePrice"></span><br/>
+                            <span id="postCoupon" class="postCoupon">
+                                <span class="couponWord">劵</span>
+                                <span class="postCouponInfo" id="postCouponInfo"></span>
                             </span>
                         </div>
-                        <div style="float: left; width: 450px; padding: 10px; text-align: center;" id="qrcodeDiv">
-                            <span style="color: #ea521c; font-size: 30px;">长按识别二维码</span>
+                        <div class="postInfoTwo" id="qrcodeDiv">
+                            <span class="qrcodeTip">长按识别二维码</span>
                         </div>
                     </div>
                 </div>
-                <div id="imageInfo" style="min-width: 300px;"></div>
+                <div id="imageInfo" class="postImage"></div>
             </div>
             <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
 

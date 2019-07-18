@@ -157,6 +157,16 @@ $(function () {
 })
 
 function doShare() {
+    var img = new Image();
+    img.src = $("#postImg").attr("src");
+    if(!img.complete) {
+        $("#bottombar").html("求求您点慢点,我脑子受不了~");
+        $("#bottombar").fadeIn(1000);
+        setTimeout(function () {
+            $("#bottombar").fadeOut(1000);
+        }, 3000)
+        return;
+    }
     $(document.body).css({
         "overflow-x":"hidden",
         "overflow-y":"hidden"

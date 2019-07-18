@@ -179,3 +179,49 @@
 .c_info_color_white {
     color: #ffffff;
 }
+.canvasToImageDiv {
+    display: none;
+    width: 1000px;
+}
+.postImg {
+    width: 100%;
+}
+.postInfo {
+    overflow: auto; background-color: #ffffff;
+}
+.postInfoOne {
+    float: left; width: 550px; padding: 37px 15px;
+}
+.postInfoTwo {
+    float: left; width: 450px; padding: 10px; text-align: center;
+}
+.qrcodeTip {
+    color: #ea521c; font-size: 30px;
+}
+.postImage {
+    min-width: 300px;
+}
+.couponWord {
+    background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;
+}
+.postCouponInfo {
+    background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;
+}
+.postCoupon {
+    display: none;
+}
+.postReservePrice {
+    color: #8c8c8c; font-size: 40px;" class="c_info_disable
+}
+.postReservePriceTag {
+    color: #8c8c8c; font-size: 40px;
+}
+.postTitle {
+    font-size: 40px; font-weight: bold;
+}
+.postNowPriceTag {
+    color: #ed6d27; font-size: 50px;
+}
+.postNowPrice{
+    color: #ed6d27; font-size: 70px;
+}
