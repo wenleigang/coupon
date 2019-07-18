@@ -1,163 +1,163 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>商品详情</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <script type="text/javascript">var ctx = '${ctx}'</script>
-        <script type="text/javascript" src="${ctx}/static/js/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/swiper-4.5.0/js/swiper.min.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/html2canvas/html2canvas.min.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/html2canvas/canvas2image.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/qrcode/jquery.qrcode.min.js"></script>
-        <script type="text/javascript" src="${ctx}/static/plugins/clipboard/clipboard.min.js"></script>
-        <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css"/>
-        <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/bootstrap-3.3.7-dist/css/bootstrap-theme.css"/>
-        <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/font-awesome-4.7.0/css/font-awesome.css"/>
-        <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/swiper-4.5.0/css/swiper.min.css">
-        <link type="text/css" rel="stylesheet" href="${ctx}/static/css/tb/good_info.css">
-    </head>
-    <body class="c_container">
-        <div class="c_content">
-            <!-- 顶部提示框 -->
-            <div id="topbar" class="c_topbar" style="display: none;"></div>
-            <!-- 顶部提示框 -->
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript">var ctx = '${ctx}'</script>
+    <script type="text/javascript" src="${ctx}/static/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/swiper-4.5.0/js/swiper.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/html2canvas/html2canvas.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/html2canvas/canvas2image.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/qrcode/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/plugins/clipboard/clipboard.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/bootstrap-3.3.7-dist/css/bootstrap-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/swiper-4.5.0/css/swiper.min.css">
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/css/tb/good_info.css">
+</head>
+<body class="c_container">
+<div class="c_content">
+    <!-- 顶部提示框 -->
+    <div id="topbar" class="c_topbar" style="display: none;"></div>
+    <!-- 顶部提示框 -->
 
-            <!-- 底部提示框 -->
-            <div id="bottombar" class="c_bottombar" style="display: none;"></div>
-            <!-- 底部提示框 -->
+    <!-- 底部提示框 -->
+    <div id="bottombar" class="c_bottombar" style="display: none;"></div>
+    <!-- 底部提示框 -->
 
-            <!-- 广告轮播 -->
-            <div class="swiper-container">
-                <div class="swiper-wrapper" id="swiperInfo"></div>
-                <div class="swiper-pagination c_info_color_white"></div>
+    <!-- 广告轮播 -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="swiperInfo"></div>
+        <div class="swiper-pagination c_info_color_white"></div>
+    </div>
+    <!-- 广告轮播 -->
+
+    <!-- 价格标签 -->
+    <div class="c_info_content">
+        <span class="c_active_price_tag" id="nowPriceTag"></span><span class="c_active_price" id="nowPrice"></span>&nbsp;&nbsp;
+        <span class="c_info_text">原价￥</span><span class="c_info_text c_info_disable" id="reservePriceInfo"></span><br/>
+        <span class="c_xs_tag" id="catNameInfo"></span><span class="c_xs_tag" id="catLeafNameInfo"></span>
+    </div>
+    <!-- 价格标签 -->
+
+    <div class="c_div_10px"></div>
+
+    <!-- 优惠券信息 -->
+    <div id="coupon_div" class="c_info_content">
+        <div class="c_coupon_content">
+            <div class="c_coupon_info">
+                <i class="fa fa-ticket c_info_color_white" aria-hidden="true"></i>&nbsp;<span class="c_sm_tag" id="couponInfo"></span>
             </div>
-            <!-- 广告轮播 -->
-
-            <!-- 价格标签 -->
-            <div class="c_info_content">
-                <span class="c_active_price_tag" id="nowPriceTag"></span><span class="c_active_price" id="nowPrice"></span>&nbsp;&nbsp;
-                <span class="c_info_text">原价￥</span><span class="c_info_text c_info_disable" id="reservePriceInfo"></span><br/>
-                <span class="c_xs_tag" id="catNameInfo"></span><span class="c_xs_tag" id="catLeafNameInfo"></span>
-            </div>
-            <!-- 价格标签 -->
-
-            <div class="c_div_10px"></div>
-
-            <!-- 优惠券信息 -->
-            <div id="coupon_div" class="c_info_content">
-                <div class="c_coupon_content">
-                    <div class="c_coupon_info">
-                        <i class="fa fa-ticket c_info_color_white" aria-hidden="true"></i>&nbsp;<span class="c_sm_tag" id="couponInfo"></span>
-                    </div>
-                    <div class="c_coupon_num">
+            <div class="c_coupon_num">
                         <span class="c_coupon_text">
                             <i class="fa fa-gift" aria-hidden="true"></i>&nbsp;劵:<span id="couponRemainCountInfo"></span>&nbsp;&nbsp;/<span id="couponTotalCountInfo"></span>张
                         </span>
-                    </div>
-                    <div class="c_coupon_clear"></div>
-                    <div class="c_coupon_time">
+            </div>
+            <div class="c_coupon_clear"></div>
+            <div class="c_coupon_time">
                         <span class="c_coupon_text">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;优惠券有效期:<span id="couponStartTimeInfo"></span>&nbsp;&nbsp;~<span id="couponEndTimeInfo"></span>
                         </span>
-                    </div>
-                </div>
             </div>
-            <!-- 优惠券信息 -->
+        </div>
+    </div>
+    <!-- 优惠券信息 -->
 
-            <div id="coupon_div_bottom" class="c_div_10px"></div>
+    <div id="coupon_div_bottom" class="c_div_10px"></div>
 
-            <!-- 店铺,商品名 -->
-            <div class="c_info_content">
-                <img id="storeType" class="c_icon">
-                <span class="c_font_size_12" id="nickInfo"></span><br/>
-                <span class="c_info_title" id="titleInfo"></span>
+    <!-- 店铺,商品名 -->
+    <div class="c_info_content">
+        <img id="storeType" class="c_icon">
+        <span class="c_font_size_12" id="nickInfo"></span><br/>
+        <span class="c_info_title" id="titleInfo"></span>
+    </div>
+    <div class="c_info_content">
+        <div class="c_goods_info_col"><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;发货:<span id="provcityInfo"></span></div>
+        <div class="c_goods_info_col"><i class="fa fa-signal fa-lg" aria-hidden="true"></i>&nbsp;月销:<span id="volumeInfo"></span></div>
+    </div>
+    <!-- 店铺,商品名 -->
+
+    <div class="c_div_10px"></div>
+    <div class="c_info_text c_center_text">-----图文详情参见淘宝商品详情-----</div>
+
+    <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
+    <div id="canvasToImageDiv" style="display: none; width: 1000px;">
+        <div id="postInfo">
+            <div>
+                <img id="postImg" width="100%">
             </div>
-            <div class="c_info_content">
-                <div class="c_goods_info_col"><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&nbsp;发货:<span id="provcityInfo"></span></div>
-                <div class="c_goods_info_col"><i class="fa fa-signal fa-lg" aria-hidden="true"></i>&nbsp;月销:<span id="volumeInfo"></span></div>
-            </div>
-            <!-- 店铺,商品名 -->
-
-            <div class="c_div_10px"></div>
-            <div class="c_info_text c_center_text">-----图文详情参见淘宝商品详情-----</div>
-
-            <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
-            <div id="canvasToImageDiv" class="canvasToImageDiv">
-                <div id="postInfo">
-                    <div>
-                        <img id="postImg" class="postImg">
-                    </div>
-                    <div class="postInfo">
-                        <div class="postInfoOne">
-                            <div class="postTitle" id="postTitle"></div>
-                            <span class="postNowPriceTag" id="postNowPriceTag"></span>
-                            <span class="postNowPrice" id="postNowPrice"></span><br/>
-                            <span class="postReservePriceTag">原价￥</span>
-                            <span id="postReservePrice" class="postReservePrice"></span><br/>
-                            <span id="postCoupon" class="postCoupon">
-                                <span class="couponWord">劵</span>
-                                <span class="postCouponInfo" id="postCouponInfo"></span>
+            <div style="overflow: auto; background-color: #ffffff;">
+                <div style="float: left; width: 550px; padding: 37px 15px;">
+                    <div id="postTitle" style="font-size: 40px; font-weight: bold;"></div>
+                    <span id="postNowPriceTag" style="color: #ed6d27; font-size: 50px;"></span>
+                    <span id="postNowPrice" style="color: #ed6d27; font-size: 70px;"></span><br/>
+                    <span style="color: #8c8c8c; font-size: 40px;">原价￥</span>
+                    <span id="postReservePrice" style="color: #8c8c8c; font-size: 40px;" class="c_info_disable"></span><br/>
+                    <span id="postCoupon" style="display: none;">
+                                <span style="background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;">劵</span>
+                                <span id="postCouponInfo" style="background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;"></span>
                             </span>
-                        </div>
-                        <div class="postInfoTwo" id="qrcodeDiv">
-                            <span class="qrcodeTip">长按识别二维码</span>
-                        </div>
-                    </div>
                 </div>
-                <div id="imageInfo" class="postImage"></div>
-            </div>
-            <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
-
-        </div>
-
-        <!-- 底部操作按钮 -->
-        <div class="c_toolbar">
-            <div class="c_toolbar_home" onclick="doHome()"><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;首页</div>
-            <div class="c_toolbar_share" onclick="doShare()"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i>&nbsp;分享</div>
-            <div class="c_toolbar_browser" onclick="doBrowse()">浏览器打开</div>
-            <div class="c_toolbar_buy" onclick="doCopyModal()">领券购买</div>
-        </div>
-        <!-- 底部操作按钮 -->
-
-        <!-- 分享海报模态框（Modal） -->
-        <div class="modal fade" id="myModal" style="padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div id="modalContent" class="modal-dialog" style="margin: 0 auto;">
-                <div class="modal-content" style="padding: 10px; margin: 40px; position: relative;">
-                    <img id="postImage" style="width: 100%;">
+                <div style="float: left; width: 450px; padding: 10px; text-align: center;" id="qrcodeDiv">
+                    <span style="color: #ea521c; font-size: 30px;">长按识别二维码</span>
                 </div>
             </div>
         </div>
-        <!-- 分享海报模态框（Modal） -->
+        <div id="imageInfo" style="min-width: 300px;"></div>
+    </div>
+    <!-- 广告海报页面设计,不展示,为canvas绘制图片所用 -->
 
-        <!-- 复制淘口令模态框（Modal） -->
-        <div class="modal fade" id="copyModal" style="padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div id="copyModalContent" class="modal-dialog" style="margin: 0 auto;">
-                <div class="modal-content" style="padding: 10px; margin: 40px;">
-                    <div style="text-align: center; margin-bottom: 10px; font-weight: bolder; color: #EA521C;">淘口令</div>
-                    <div style="border: 2px dashed #ea521c; background-color: #feede9; color: #ea521c; padding: 30px; position: relative;">
-                        <span id="twpCodeInfo"></span>
-                        <div id="copyBtn" style="position: absolute; right: -10px; bottom: -15px; background-color: #E95727; color: #ffffff; letter-spacing:2px; padding: 5px 10px; border-radius: 10px;">一键复制</div>
-                    </div>
-                    <div id="copyHelpInfo" style="margin-top: 20px;">
-                        <img style="width: 100%;" src="${ctx}/static/image/icon/tip.png">
-                    </div>
-                    <div id="copySuccessInfo" style="display: none; margin-top: 20px;">
-                        <img style="width: 100%;" src="${ctx}/static/image/icon/copySuccess.png">
-                    </div>
-                </div>
-                <div id="copyTip" style="text-align: center; display: none">
-                    <span style="padding: 7px 30px; background-color:rgba(0, 0, 0,0.7); border-radius: 7px; font-weight: bolder; color: #fff;"></span>
-                </div>
+</div>
+
+<!-- 底部操作按钮 -->
+<div class="c_toolbar">
+    <div class="c_toolbar_home" onclick="doHome()"><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;首页</div>
+    <div class="c_toolbar_share" onclick="doShare()"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i>&nbsp;分享</div>
+    <div class="c_toolbar_browser" onclick="doBrowse()">浏览器打开</div>
+    <div class="c_toolbar_buy" onclick="doCopyModal()">领券购买</div>
+</div>
+<!-- 底部操作按钮 -->
+
+<!-- 分享海报模态框（Modal） -->
+<div class="modal fade" id="myModal" style="padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="modalContent" class="modal-dialog" style="margin: 0 auto;">
+        <div class="modal-content" style="padding: 10px; margin: 40px; position: relative;">
+            <img id="postImage" style="width: 100%;">
+        </div>
+    </div>
+</div>
+<!-- 分享海报模态框（Modal） -->
+
+<!-- 复制淘口令模态框（Modal） -->
+<div class="modal fade" id="copyModal" style="padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="copyModalContent" class="modal-dialog" style="margin: 0 auto;">
+        <div class="modal-content" style="padding: 10px; margin: 40px;">
+            <div style="text-align: center; margin-bottom: 10px; font-weight: bolder; color: #EA521C;">淘口令</div>
+            <div style="border: 2px dashed #ea521c; background-color: #feede9; color: #ea521c; padding: 30px; position: relative;">
+                <span id="twpCodeInfo"></span>
+                <div id="copyBtn" style="position: absolute; right: -10px; bottom: -15px; background-color: #E95727; color: #ffffff; letter-spacing:2px; padding: 5px 10px; border-radius: 10px;">一键复制</div>
+            </div>
+            <div id="copyHelpInfo" style="margin-top: 20px;">
+                <img style="width: 100%;" src="${ctx}/static/image/icon/tip.png">
+            </div>
+            <div id="copySuccessInfo" style="display: none; margin-top: 20px;">
+                <img style="width: 100%;" src="${ctx}/static/image/icon/copySuccess.png">
             </div>
         </div>
-        <!-- 复制淘口令模态框（Modal） -->
-    </body>
-    <script type="text/javascript" src="${ctx}/static/js/tb/goods_info.js"></script>
-    <script type="text/javascript">
-        var goodsId = '${goodsId}';
-    </script>
+        <div id="copyTip" style="text-align: center; display: none">
+            <span style="padding: 7px 30px; background-color:rgba(0, 0, 0,0.7); border-radius: 7px; font-weight: bolder; color: #fff;"></span>
+        </div>
+    </div>
+</div>
+<!-- 复制淘口令模态框（Modal） -->
+</body>
+<script type="text/javascript" src="${ctx}/static/js/tb/goods_info.js"></script>
+<script type="text/javascript">
+    var goodsId = '${goodsId}';
+</script>
 </html>
