@@ -3,6 +3,8 @@ package com.coupon.core.utils;
 import com.coupon.core.common.Constants;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,80 +22,106 @@ import java.util.regex.Pattern;
  */
 public class TbkUtils {
 
+    /*在Java中，不管是String.split()，还是正则表达式，有一些特殊字符需要转义，需要转义的字符有：
+            (    [     {    /    ^    -    $     ¦     }    ]    )    ?    *    +    . 
+      转义方法为字符前面加上"\\"，这样在split、replaceAll时就不会报错了；
+      但是有一点需要注意，String.contains()方法是不需要转义的。*/
+    public static final String[] tempStr = {"(", ")", "[", "]", "{", "}" , "+", "/", "|", "-", "?", "\\\\", "^", ".", "*", "$", "¦"};
+
     /**
-     * 判断文字中是否包含淘口令
-     * @param textInfo
+     * 判断是否是汉字
+     * @param achar
      * @return
      */
-    public static String hasTpwdcode(String textInfo) {
-        String regex1 = "\\￥([a-zA-Z0-9]{11})\\￥";
-        String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
-        String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
-        String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
-        String regex5 = "\\₤([a-zA-Z0-9]{11})\\₤";
-        Pattern p1 = Pattern.compile(regex1);
-        Matcher m1 = p1.matcher(textInfo);
-        if(m1.find()) {
-            return "￥";
-        }
-        Pattern p2 = Pattern.compile(regex2);
-        Matcher m2 = p2.matcher(textInfo);
-        if(m2.find()) {
-            return "€";
-        }
-        Pattern p3 = Pattern.compile(regex3);
-        Matcher m3 = p3.matcher(textInfo);
-        if(m3.find()) {
-            return "$";
-        }
-        Pattern p4 = Pattern.compile(regex4);
-        Matcher m4 = p4.matcher(textInfo);
-        if(m4.find()) {
-            return "&";
-        }
-        Pattern p5 = Pattern.compile(regex5);
-        Matcher m5 = p5.matcher(textInfo);
-        if(m5.find()) {
-            return "₤";
-        }
-        return null;
+    //String.valueOf(c).matches("[\u4e00-\u9fa5]");
+    public static boolean isChinese(char achar) {
+        boolean matches = String.valueOf(achar).matches("[\u4e00-\u9fa5]");
+        return matches;
     }
 
     /**
-     * 判断文字是淘口令
+     * 数字字母
+     * @param achar
+     * @return
+     */
+    public static boolean isNumWord(char achar) {
+        boolean matches = String.valueOf(achar).matches("[0-9a-zA-Z]");
+        return matches;
+    }
+
+    /**
+     * 数字字母
+     * @param achar
+     * @return
+     */
+    public static boolean isCustomize(char achar) {
+        String str = String.valueOf(achar);
+        if(" ".equals(str) || "/".equals(str)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否是特殊字符
+     * @param str
+     * @return
+     */
+    public static boolean isSpecial(String str) {
+        for (int i = 0; i < tempStr.length; i++) {
+            if(str.equals(tempStr[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否是淘口令格式字符串
+     * @param str
+     * @return
+     */
+    public static boolean isCode(String str) {
+        String regex = "[a-zA-Z0-9]{10,11}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    /**
+     * 提取淘口令
      * @param textInfo
      * @return
      */
-    public static String isTpwdcode(String textInfo) {
-        String regex1 = "\\￥([a-zA-Z0-9]{11})\\￥";
-        String regex2 = "\\€([a-zA-Z0-9]{11})\\€";
-        String regex3 = "\\$([a-zA-Z0-9]{11})\\$";
-        String regex4 = "\\&([a-zA-Z0-9]{11})\\&";
-        String regex5 = "\\₤([a-zA-Z0-9]{11})\\₤";
-        Pattern p1 = Pattern.compile(regex1);
-        Matcher m1 = p1.matcher(textInfo);
-        if(m1.matches()) {
-            return "￥";
+    public static String extractTbCode(String textInfo) {
+        Map<Character,Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < textInfo.length(); i++) {
+            char c = textInfo.charAt(i);
+            if(!isChinese(c) && !isNumWord(c) && !isCustomize(c)) {
+                if(map.containsKey(c)){
+                    int val = map.get(c)+1;
+                    map.put(c, val);
+                }else{
+                    map.put(c, 1);
+                }
+            }
         }
-        Pattern p2 = Pattern.compile(regex2);
-        Matcher m2 = p2.matcher(textInfo);
-        if(m2.matches()) {
-            return "€";
-        }
-        Pattern p3 = Pattern.compile(regex3);
-        Matcher m3 = p3.matcher(textInfo);
-        if(m3.matches()) {
-            return "$";
-        }
-        Pattern p4 = Pattern.compile(regex4);
-        Matcher m4 = p4.matcher(textInfo);
-        if(m4.matches()) {
-            return "&";
-        }
-        Pattern p5 = Pattern.compile(regex5);
-        Matcher m5 = p5.matcher(textInfo);
-        if(m5.find()) {
-            return "₤";
+        for (Character chars : map.keySet()) {
+            Integer integer = map.get(chars);
+            if(integer > 1) {
+                String charStr = String.valueOf(chars);
+                String splitStr = charStr;
+                if(isSpecial(splitStr)) {
+                    splitStr = "\\"+splitStr;
+                }
+                String[] split = textInfo.split(splitStr.toString());
+                for (String s : split) {
+                    boolean code = isCode(s);
+                    if(code) {
+                        return charStr+s+charStr;
+                    }
+                }
+            }
         }
         return null;
     }
@@ -116,41 +144,4 @@ public class TbkUtils {
         }
         return false;
     }
-
-    /**
-     * 商品信息描述文字中提取淘口令
-     * @param itemShareInfo
-     * @return
-     */
-    public static String extractTpwdcode(String itemShareInfo) {
-        String tpwdcode = "";
-        if(StringUtils.isNotBlank(itemShareInfo)) {
-            String pattern = hasTpwdcode(itemShareInfo);
-            String splitTag = pattern;
-            //特殊符号转义
-            if(pattern == "$") {
-                splitTag = "\\$";
-            }
-            if(pattern != null) {
-                tpwdcode = pattern+itemShareInfo.split(splitTag)[1]+pattern;
-            }
-        }
-        return tpwdcode;
-    }
-
-    /**
-     * 商品描述信息中提取商品标题title
-     * @param itemShareInfo
-     * @return
-     */
-    public static String extractItemTitle(String itemShareInfo) {
-        String itemTitle = "";
-        if(StringUtils.isNotBlank(itemShareInfo)) {
-            if(StringUtils.isNotBlank(itemShareInfo)) {
-                itemTitle = itemShareInfo.substring(itemShareInfo.indexOf("https"));
-            }
-        }
-        return itemTitle;
-    }
-
 }

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,12 +65,34 @@ public class TbController {
      */
     @RequestMapping(value = "/goodsInfo/{goodsId}", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> goodsInfo(@PathVariable("goodsId")String goodsId) throws Exception {
-        Map<String, Object> map = miaoYouJuanService.getiteminfo(goodsId);
-        if(map.size() == 0) {
+    public Map<String, Object> goodsInfo(@PathVariable("goodsId")String goodsId) {
+        try {
+            Map<String, Object> map = miaoYouJuanService.getiteminfo(goodsId);
+            if(map.size() == 0) {
+                return null;
+            }
+            return map;
+        }catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
-        return map;
+    }
+
+    /**
+     * 获取限时优惠页面商品列表
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/goodsList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, Object>> goodsList(Integer pageNum) {
+        try {
+            List<Map<String, Object>> list = miaoYouJuanService.getcouponrealtime(pageNum);
+            return list;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

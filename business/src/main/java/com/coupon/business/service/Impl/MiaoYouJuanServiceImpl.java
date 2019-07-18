@@ -1,6 +1,7 @@
 package com.coupon.business.service.Impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.coupon.business.service.MiaoYouJuanService;
 import com.coupon.core.common.Constants;
@@ -35,11 +36,11 @@ import java.util.Map;
 @Slf4j
 public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
 
+    public static final String BASE_PATH = "http://47.98.133.210:8081/tb/goodsInfoUi/";
+
     //高佣转链接API(淘口令)
     @Override
-    public String getitemgyurlbytpwd(String textInfo) throws Exception {
-        //商品描述提取淘口令
-        String tpwdcode = TbkUtils.extractTpwdcode(textInfo);
+    public String getitemgyurlbytpwd(String tpwdcode) throws Exception {
         if(StringUtils.isNotBlank(tpwdcode)) {
             //拼接高佣转链接API
             String tpwdcodeUrl = Constants.GY_TPWD+tpwdcode;
@@ -208,6 +209,74 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
             }
         }
         return map;
+    }
+
+    @Override
+    public List<Map<String, Object>> getcouponrealtime(Integer pageNum) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        //拼接好券直播Url
+        String contentUrl = Constants.BEST_COUPON_INFO_LIVE+pageNum;
+        //发送请求返回数据
+        String listData = HttpClientUtils.sendGet(contentUrl);
+        if(StringUtils.isNotBlank(listData)) {
+            JSONObject listJsonObject = JSON.parseObject(listData);
+            if(listJsonObject.getInteger("code") == 200) {
+                JSONArray jsonArrayData = (JSONArray)listJsonObject.get("data");
+                for(int i = 0; i < jsonArrayData.size(); i++) {
+                    JSONObject object = jsonArrayData.getJSONObject(i);
+                    Map<String, Object> map = new HashMap<>();
+                    //商品ID
+                    map.put("numIid", object.getLong("num_iid"));
+                    //商品主图
+                    map.put("pictUrl", object.getString("pict_url"));
+                    //商品标题
+                    map.put("title", object.getString("title"));
+                    //30天销量
+                    map.put("volume", object.getLong("volume"));
+                    //优惠券总量
+                    map.put("couponTotalCount", object.getLong("coupon_total_count"));
+                    //优惠券剩余量
+                    map.put("couponRemainCount", object.getLong("coupon_remain_count"));
+                    //折扣价
+                    map.put("zkFinalPrice", object.getDouble("zk_final_price"));
+                    //优惠券面额
+                    map.put("youhuiquan", object.getDouble("youhuiquan"));
+                    //优惠券使用条件，如：满XX元使用
+                    map.put("quanlimit", object.getDouble("quanlimit"));
+                    //优惠券信息
+                    map.put("couponInfo", object.getString("coupon_info"));
+                    list.add(map);
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public String goodsIdUrlLink(String textInfo) {
+        if(StringUtils.isNotBlank(textInfo)) {
+            String tpwdcode = TbkUtils.extractTbCode(textInfo);
+            if(StringUtils.isNotBlank(tpwdcode)) {
+                //拼接高佣转链接API
+                String tpwdcodeUrl = Constants.GY_TPWD+tpwdcode;
+                //发送请求返回数据
+                String couponData = HttpClientUtils.sendGet(tpwdcodeUrl);
+                //返回信息组装返回模板信息并返回
+                if(StringUtils.isNotBlank(couponData)) {
+                    JSONObject jsonObject = JSON.parseObject(couponData);
+                    if(jsonObject.getInteger("code") == 200) {
+                        JSONObject resultJson = (JSONObject)jsonObject.get("result");
+                        JSONObject dataJson = (JSONObject)resultJson.get("data");
+                        //商品ID
+                        Long itemId = dataJson.getLong("item_id");
+                        if(itemId != null) {
+                            return BASE_PATH + itemId;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     //组装返回优惠信息

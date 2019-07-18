@@ -78,6 +78,9 @@ public interface Constants {
 
     //推广位ID（*必须是授权淘宝号下的推广位）
     String PID = "mm_319880138_330050252_92359200165";
+    String PID_1 = "319880138";
+    String PID_2 = "330050252";
+    String PID_3 = "92359200165";
 
     //在喵有劵授权登录后的淘宝名称
     String TBNAME = "wenleigang834147811";
@@ -97,6 +100,9 @@ public interface Constants {
 
     //万能高佣转链API接口
     String GY_ALL = TBK_URL+"/getgyurlbyall?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&content=";
+
+    // 好券直播API
+    String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
 
     //===================== 其他格式需要接口查询优惠券 ===================================================================
     //（1）产品链接 //item.taobao.com/item.htm?id=578327349261
