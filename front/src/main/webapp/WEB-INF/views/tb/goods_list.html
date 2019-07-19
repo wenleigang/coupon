@@ -120,8 +120,6 @@
                             if(dataList == null || dataList.length == 0) {
                                 mui('#pullrefresh').pullRefresh().endPullupToRefresh((true));//参数为true代表没有更多数据了。
                             }else{
-                                $("#emptyData").hide();
-                                $("#pullrefresh").show();
                                 mui('#pullrefresh').pullRefresh().endPullupToRefresh((false));//参数为false代表有更多数据了
                                 var table = document.body.querySelector('.mui-table-view');
                                 for (var i = 0; i < dataList.length; i++) {
