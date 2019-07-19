@@ -13,10 +13,13 @@ $(function () {
                 if(data != null) {
                     var imgTemplate = "<div class='swiper-slide'><img src='"+ data.pictUrl +"'></div>";
                     var miniImageList = data.imageList;
+                    var infoListTemplate = "";
                     for(var i = 0; i < miniImageList.length; i++) {
                         imgTemplate += "<div class='swiper-slide'><img src='"+ miniImageList[i] +"'></div>";
+                        infoListTemplate += "<img width='100%' src='"+ miniImageList[i] +"'>";
                     }
                     $("#swiperInfo").html(imgTemplate);
+                    $("#itemInfoList").html(infoListTemplate);
                     $("#reservePriceInfo").html(data.reservePrice);
                     $("#catNameInfo").html(data.catLeafName);
                     $("#catLeafNameInfo").html(data.catName);
@@ -75,6 +78,9 @@ $(function () {
                         $("#topbar").html("优惠券已抢光,联系客服帮您留意下一波哟~");
                         $("#topbar").show();
                     }
+                }else {
+                    $("#bottombar").html("商品已下架,请移步【首页】获取更多优惠~");
+                    $("#bottombar").show();
                 }
             }
         },
@@ -157,6 +163,9 @@ $(function () {
 })
 
 function doShare() {
+    if($("#bottombar").is(':visible')) {
+        return;
+    }
     $(document.body).css({
         "overflow-x":"hidden",
         "overflow-y":"hidden"
