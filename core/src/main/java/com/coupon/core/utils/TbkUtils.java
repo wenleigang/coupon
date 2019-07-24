@@ -26,7 +26,8 @@ public class TbkUtils {
             (    [     {    /    ^    -    $     ¦     }    ]    )    ?    *    +    . 
       转义方法为字符前面加上"\\"，这样在split、replaceAll时就不会报错了；
       但是有一点需要注意，String.contains()方法是不需要转义的。*/
-    public static final String[] tempStr = {"(", ")", "[", "]", "{", "}" , "+", "/", "|", "-", "?", "\\\\", "^", ".", "*", "$", "¦"};
+    //public static final String[] tempStr = {"(", ")", "[", "]", "{", "}" , "+", "/", "|", "-", "?", "\\\\", "^", ".", "*", "$", "¦"};
+    public static final String[] tempStr = {"[", "]", "{", "}" , "+", "|", "-", "?", "^", "*", "$", "¦"};
 
     /**
      * 判断是否是汉字

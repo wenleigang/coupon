@@ -11,9 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.logging.Level.parse;
 
 /**
  * @ProjectName: workspace_coupon
@@ -109,7 +116,7 @@ public class TestController {
 
     public static void main(String[] args) {
         /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
-        String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述₳CLVXYTNKYUg₳后到淘♂寳♀";
+        String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
         String textInfo3 = "【2019春季 通城学典小学数学计算能手四年级下册北师大版 小学生4年级提升思维训练口算估算笔算练习册提升默写能力练习工具书/正版】https://m.tb.cn/h.e6r2ZGZ?sm=0f8da9 点击链接，再选择浏览器咑閞；或復·制这段描述¢OADFYTkmGcd¢后到淘♂寳♀";
         String textInfo4 = "【BEAMS JAPAN 三针手表腕表 日本制】https://m.tb.cn/h.eTJK1Wt?sm=538dbf 点击链接，再选择浏览器咑閞；或復·制这段描述$K7s1YTOsl7w$后到淘♂寳♀";
         String textInfo5 = "【2019春季 通城学典小学数学计算能手四年级下册北师大版 小学生4年级提升思维训练口算估算笔算练习册提升默写能力练习工具书/正版】https://m.tb.cn/h.e6r2ZGZ?sm=0f8da9 点击链接，再选择浏览器咑閞；或復·制这段描述¢OADFYTkmGcd¢后到淘♂寳♀";
@@ -148,5 +155,11 @@ public class TestController {
         int i = text.indexOf("到【手机淘宝】即可查看");
         int j = text.indexOf("到【手机淘宝】即111111可查看");
         System.out.println(i +"--"+ j);*/
+        String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
+        String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
+        String s1 = TbkUtils.extractTbCode(textInfo1);
+        String s2 = TbkUtils.extractTbCode(textInfo2);
+        System.err.println(s1);
+        System.err.println(s2);
     }
 }
