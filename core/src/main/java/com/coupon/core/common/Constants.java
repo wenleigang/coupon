@@ -82,6 +82,9 @@ public interface Constants {
     String PID_2 = "330050252";
     String PID_3 = "92359200165";
 
+    //京东联盟id
+    String UNION_Id = "1001734523";
+
     //在喵有劵授权登录后的淘宝名称
     String TBNAME = "wenleigang834147811";
 
@@ -104,6 +107,12 @@ public interface Constants {
     // 好券直播API
     String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
 
+    //(新版京东)京东商品查询API
+    String JD_ITEM_INFO = "https://api.open.21ds.cn/jd_api_v1/getjdunionitems?apkey="+MYJ_APKEY+"&skuIds=";
+
+    //(新版京东)获取商品推广链接
+    String JD_ITEM_SHARE_INFO = "https://api.open.21ds.cn/jd_api_v1/getitemcpsurl?apkey="+MYJ_APKEY+"&unionId="+UNION_Id+"&materialId=";
+
     //===================== 其他格式需要接口查询优惠券 ===================================================================
     //（1）产品链接 //item.taobao.com/item.htm?id=578327349261
     String URL_TYPE_ITEM_LINK = "item.taobao.com";
@@ -120,4 +129,8 @@ public interface Constants {
 
     //（5）手淘APP的分享链接：http://m.tb.cn/h.ZAa8Z
     String URL_TYPE_MOBILE_SHARE_LINK = "m.tb.cn";
+
+    //===================== 京东商品分享格式pattern ===================================================================
+    String JD_WEB_SHARE_URL = "item.jd.com";
+    String JD_MOBILE_SHARE_URL = "item.m.jd.com";
 }

@@ -32,4 +32,9 @@ public interface MiaoYouJuanService {
     //获取淘宝商品链接
     String goodsIdUrlLink(String textInfo) throws Exception;
 
+    //(新版京东)京东商品查询API
+    String getjdunionitems(String textInfo) throws Exception;
+
+    //(新版)获取商品推广链接
+    String getitemcpsurl() throws Exception;
 }

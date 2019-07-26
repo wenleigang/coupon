@@ -36,6 +36,7 @@ import java.util.Map;
 @Slf4j
 public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
 
+
     public static final String BASE_PATH = "http://47.98.133.210:8081/tb/goodsInfoUi/";
 
     //高佣转链接API(淘口令)
@@ -276,6 +277,165 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                 }
             }
         }
+        return null;
+    }
+
+    @Override
+    public String getjdunionitems(String textInfo) throws Exception {
+        String jdItemId = TbkUtils.extractJdItemId(textInfo);
+        if(StringUtils.isNotBlank(jdItemId)) {
+            //京东商品查询API
+            String contentUrl = Constants.JD_ITEM_INFO + jdItemId;
+            //发送请求返回数据
+            String listData = HttpClientUtils.sendGet(contentUrl);
+            if(StringUtils.isNotBlank(listData)) {
+                JSONObject listJsonObject = JSON.parseObject(listData);
+                if(listJsonObject.getInteger("code") == 200) {
+                    JSONObject resultJson = (JSONObject)listJsonObject.get("data");
+                    //请求到的总商品数
+                    Integer totalCount = resultJson.getInteger("totalCount");
+                    //商品列表
+                    JSONArray jsonArrayData = (JSONArray)resultJson.get("lists");
+                    for(int i = 0; i < jsonArrayData.size(); i++) {
+                        JSONObject object = jsonArrayData.getJSONObject(i);
+                        //类目信息
+                        /*JSONObject categoryInfo = object.getJSONObject("categoryInfo");
+                        String cid1 = categoryInfo.getString("cid1");//一级类目ID
+                        String cid1Name = categoryInfo.getString("cid1Name");//一级类目名
+                        String cid2 = categoryInfo.getString("cid2");//二级类目ID
+                        String cid2Name = categoryInfo.getString("cid2Name");//二级类目名
+                        String cid3 = categoryInfo.getString("cid3");//三级类目ID
+                        String cid3Name = categoryInfo.getString("cid3Name");//三级类目名*/
+                        //佣金信息
+                        JSONObject commissionInfo = object.getJSONObject("commissionInfo");
+                        String commission = commissionInfo.getString("commission");//佣金
+                        String commissionShare = commissionInfo.getString("commissionShare");//佣金比例
+                        //优惠券信息，返回内容为空说明该SKU无可用优惠券
+                        JSONObject couponInfo = object.getJSONObject("couponInfo");
+                        StringBuffer cb = new StringBuffer();
+                        if(couponInfo != null && couponInfo.size() != 0) {
+                            JSONArray couponList = couponInfo.getJSONArray("couponList");//优惠券合集
+                            for(int j = 0; j < couponList.size(); j++) {
+                                JSONObject couponObject = couponList.getJSONObject(j);
+                                //优惠券种类：0 - 全品类，1 - 限品类（自营商品），2 - 限店铺，3 - 店铺限商品券
+                                String bindType = couponObject.getString("bindType");
+                                String typeText = "]";
+                                if(bindType.equals(0)) {
+                                    typeText = "/全品类]";
+                                }
+                                if(bindType.equals(1)) {
+                                    typeText = "/限品类]";
+                                }
+                                if(bindType.equals(2)) {
+                                    typeText = "/限店铺]";
+                                }
+                                if(bindType.equals(3)) {
+                                    typeText = "/店铺限商品]";
+                                }
+                                //券面额
+                                String discount = couponObject.getString("discount");
+                                //券链接
+                                //String link = couponObject.getString("link");
+                                //平台类型：0 - 全平台券，1 - 限平台券
+                                String platformType = couponObject.getString("platformType");
+                                //券消费限额
+                                String quota = couponObject.getString("quota");
+                                //领取开始时间
+                                //String getStartTime = couponObject.getString("getStartTime");
+                                //券领取结束时间
+                                //String getEndTime = couponObject.getString("getEndTime");
+                                //券有效使用开始时间
+                                //String useStartTime = couponObject.getString("useStartTime");
+                                //券有效使用结束时间
+                                //String useEndTime = couponObject.getString("useEndTime");
+                                String couponTag = "[满"+quota+"元减"+discount+"元"+typeText;
+                                cb.append(couponTag).append("\n");
+                            }
+                        }
+                        //图片信息
+                        /*JSONObject imageInfo = object.getJSONObject("imageInfo");
+                        JSONArray imageList = imageInfo.getJSONArray("imageList");//图片合集
+                        for(int k = 0; k < imageList.size(); k++) {
+                            JSONObject imageObject = imageList.getJSONObject(k);
+                            String url = imageObject.getString("url");//图片链接地址
+                        }*/
+                        //价格信息
+                        JSONObject priceInfo = object.getJSONObject("priceInfo");
+                        String price = priceInfo.getString("price");//无线价格
+                        //店铺信息
+                        JSONObject shopInfo = object.getJSONObject("shopInfo");
+                        //String shopName = shopInfo.getString("shopName");//店铺名称(或供应商名称)
+                        //String shopId = shopInfo.getString("shopId");//店铺ID
+                        //评论数
+                        //String comments = object.getString("comments");
+                        //商品好评率
+                        //String goodCommentsShare = object.getString("goodCommentsShare");
+                        //30天引单数量
+                        //String inOrderCount30Days = object.getString("inOrderCount30Days");
+                        //是否自营 (1 : 是, 0 : 否)，后续会废弃，请用owner
+                        //String isJdSale = object.getString("isJdSale");
+                        //商品落地页
+                        //String materialUrl = object.getString("materialUrl");
+                        //商品ID
+                        //String skuId = object.getString("skuId");
+                        //商品名称
+                        String skuName = object.getString("skuName");
+                        //是否爆款 1：是，0：否
+                        //String isHot = object.getString("isHot");
+                        //spuid，其值为同款商品的主skuid
+                        //String spuid = object.getString("spuid");
+                        //品牌code
+                        //String brandCode = object.getString("brandCode");
+                        //品牌名
+                        //String brandName = object.getString("brandName");
+                        //g=自营，p=pop
+                        //String owner = object.getString("owner");
+
+                        //获取分享链接
+                        //京东商品查询API
+                        String shareInfoUrl = Constants.JD_ITEM_SHARE_INFO + textInfo;
+                        //发送请求返回数据
+                        String urlData = HttpClientUtils.sendGet(shareInfoUrl);
+                        if(StringUtils.isNotBlank(urlData)) {
+                            JSONObject jsonObject = JSON.parseObject(urlData);
+                            if(jsonObject.getInteger("code") == 200) {
+                                JSONObject dataJson = (JSONObject)jsonObject.get("data");
+                                //生成的推广目标链接，以短链接形式，有效期为半年
+                                String shortURL = dataJson.getString("shortURL");
+
+                                //拼接返回的优惠信息模板
+                                StringBuffer sb = new StringBuffer();
+                                //商品title
+                                sb.append("【").append(skuName).append("】\n");
+                                //显示商品价格
+                                sb.append("【价格】").append(price).append("元\n");
+                                //返利给客户金额;预估最多返利
+                                Double rebateJdPrice = PriceUtils.rebateJdPrice(commission, commissionShare);
+                                sb.append("【预估返利】").append(rebateJdPrice).append("元\n");
+                                //优惠券
+                                if(StringUtils.isNotBlank(cb.toString())) {
+                                    sb.append("【优惠券】").append(cb.toString());
+                                }
+                                //下单地址
+                                sb.append("【下单地址】\n").append(shortURL).append("\n");
+                                sb.append("------------------------------\n");
+                                //提示
+                                sb.append("点击【下单地址】跳转京东app下单!\n");
+                                sb.append("------------------------------\n");
+                                sb.append("【推广福利】发送订单截图立刻获得返利红包!");
+                                return sb.toString();
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getitemcpsurl() throws Exception {
         return null;
     }
 

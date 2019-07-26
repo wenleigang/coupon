@@ -5,6 +5,7 @@ import com.coupon.business.service.MiaoYouJuanService;
 import com.coupon.business.service.TuLingService;
 import com.coupon.core.utils.TbkUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,6 +115,21 @@ public class TestController {
         }
     }
 
+    @RequestMapping(value = "/jd")
+    @ResponseBody
+    public String jd(String info) {
+        try {
+            if(TbkUtils.isJdLink(info)) {
+                String jdRebateMessage = miaoYouJuanService.getjdunionitems(info);
+                return jdRebateMessage;
+                }
+            return "查询失败";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage().toString();
+        }
+    }
+
     public static void main(String[] args) {
         /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
         String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
@@ -155,11 +171,13 @@ public class TestController {
         int i = text.indexOf("到【手机淘宝】即可查看");
         int j = text.indexOf("到【手机淘宝】即111111可查看");
         System.out.println(i +"--"+ j);*/
-        String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
+        /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
         String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
         String s1 = TbkUtils.extractTbCode(textInfo1);
         String s2 = TbkUtils.extractTbCode(textInfo2);
         System.err.println(s1);
-        System.err.println(s2);
+        System.err.println(s2);*/
+        String text1 = "https://item.jd.com/44076405945.html#none";
+        String text2 = "https://item.m.jd.com/product/51138623981.html?wxa_abtest=o&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share";
     }
 }

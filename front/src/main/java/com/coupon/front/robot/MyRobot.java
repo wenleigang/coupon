@@ -43,6 +43,19 @@ public class MyRobot extends WeChatBot {
                 //微信消息文本内容
                 String textInfo = message.getText();
 
+                //判断是京东商品分享链接
+                if(TbkUtils.isJdLink(textInfo)) {
+                    //发送提示消息
+                    this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
+                    String jdRebateMessage = miaoYouJuanService.getjdunionitems(textInfo);
+                    if(jdRebateMessage != null) {
+                        this.sendMsg(message.getFromUserName(), jdRebateMessage);
+                    }else {
+                        this.sendMsg(message.getFromUserName(), "分享商品已下架或暂无优惠!");
+                    }
+                    return;
+                }
+
                 //此判断是淘宝联盟推广文字,转成商品详情地址
                 if(textInfo.indexOf("到【手机淘宝】即可查看") != -1) {
                     String goodsIdUrlLink = miaoYouJuanService.goodsIdUrlLink(textInfo);
@@ -53,8 +66,10 @@ public class MyRobot extends WeChatBot {
                     }
                     return;
                 }
+
                 String pattern = TbkUtils.extractTbCode(textInfo);
-                if(pattern != null) {//1.淘口令类型【淘宝商品分享链接文字包含有淘口令查询优惠】
+                //1.淘口令类型【淘宝商品分享链接文字包含有淘口令查询优惠】
+                if(pattern != null) {
                     //发送提示消息
                     this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
                     String couponMessage = miaoYouJuanService.getitemgyurlbytpwd(pattern);

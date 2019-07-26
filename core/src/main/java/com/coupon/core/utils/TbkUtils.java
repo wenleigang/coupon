@@ -145,4 +145,31 @@ public class TbkUtils {
         }
         return false;
     }
+
+    /**
+     * 判断文字信息是否是京东类分享链接
+     * @param text
+     * @return
+     */
+    public static boolean isJdLink(String text) {
+        if(text.contains(Constants.JD_WEB_SHARE_URL) || text.contains(Constants.JD_MOBILE_SHARE_URL)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 提取京东商品id
+     * @param text
+     * @return
+     */
+    public static String extractJdItemId(String text) {
+        String temp = text.substring(0, text.indexOf(".html"));
+        String itemId = temp.substring(temp.lastIndexOf("/")+1);
+        if(itemId != null) {
+            return itemId;
+        }else {
+            return null;
+        }
+    }
 }
