@@ -318,19 +318,20 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             for(int j = 0; j < couponList.size(); j++) {
                                 JSONObject couponObject = couponList.getJSONObject(j);
                                 //优惠券种类：0 - 全品类，1 - 限品类（自营商品），2 - 限店铺，3 - 店铺限商品券
+                                //「」『』〖〗
                                 String bindType = couponObject.getString("bindType");
-                                String typeText = "]";
+                                String typeText = "』";
                                 if(bindType.equals("0")) {
-                                    typeText = "/全品类]";
+                                    typeText = "/全品类』";
                                 }
                                 if(bindType.equals("1")) {
-                                    typeText = "/限品类]";
+                                    typeText = "/限品类』";
                                 }
                                 if(bindType.equals("2")) {
-                                    typeText = "/限店铺]";
+                                    typeText = "/限店铺』";
                                 }
                                 if(bindType.equals("3")) {
-                                    typeText = "/店铺限商品]";
+                                    typeText = "/店铺限商品』";
                                 }
                                 //券面额
                                 String discount = couponObject.getString("discount");
@@ -348,8 +349,8 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 //String useStartTime = couponObject.getString("useStartTime");
                                 //券有效使用结束时间
                                 //String useEndTime = couponObject.getString("useEndTime");
-                                String couponTag = "[满"+quota+"元减"+discount+"元"+typeText;
-                                cb.append(couponTag).append("\n");
+                                String couponTag = "『满"+quota+"元减"+discount+"元"+typeText;
+                                cb.append(couponTag);
                             }
                         }
                         //图片信息
@@ -416,7 +417,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 sb.append("【预估返利】").append(rebateJdPrice).append("元\n");
                                 //优惠券
                                 if(StringUtils.isNotBlank(cb.toString())) {
-                                    sb.append("【优惠券】").append(cb.toString());
+                                    sb.append("【优惠券】").append(cb.toString()).append("\n");
                                 }
                                 //下单地址
                                 sb.append("【下单地址】\n").append(shortURL).append("\n");
