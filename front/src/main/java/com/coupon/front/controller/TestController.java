@@ -122,7 +122,7 @@ public class TestController {
             if(TbkUtils.isJdLink(info)) {
                 String jdRebateMessage = miaoYouJuanService.getjdunionitems(info);
                 return jdRebateMessage;
-                }
+            }
             return "查询失败";
         } catch (Exception e) {
             e.printStackTrace();

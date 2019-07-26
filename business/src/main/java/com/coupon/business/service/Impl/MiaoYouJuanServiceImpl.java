@@ -320,16 +320,16 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 //优惠券种类：0 - 全品类，1 - 限品类（自营商品），2 - 限店铺，3 - 店铺限商品券
                                 String bindType = couponObject.getString("bindType");
                                 String typeText = "]";
-                                if(bindType.equals(0)) {
+                                if(bindType.equals("0")) {
                                     typeText = "/全品类]";
                                 }
-                                if(bindType.equals(1)) {
+                                if(bindType.equals("1")) {
                                     typeText = "/限品类]";
                                 }
-                                if(bindType.equals(2)) {
+                                if(bindType.equals("2")) {
                                     typeText = "/限店铺]";
                                 }
-                                if(bindType.equals(3)) {
+                                if(bindType.equals("3")) {
                                     typeText = "/店铺限商品]";
                                 }
                                 //券面额
@@ -393,7 +393,9 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
 
                         //获取分享链接
                         //京东商品查询API
-                        String shareInfoUrl = Constants.JD_ITEM_SHARE_INFO + textInfo;
+                        //使用Urlencode进行编码
+                        String encode = URLEncoder.encode(textInfo, "GBK");
+                        String shareInfoUrl = Constants.JD_ITEM_SHARE_INFO + encode;
                         //发送请求返回数据
                         String urlData = HttpClientUtils.sendGet(shareInfoUrl);
                         if(StringUtils.isNotBlank(urlData)) {
