@@ -14,10 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -179,5 +176,36 @@ public class TestController {
         System.err.println(s2);*/
         String text1 = "https://item.jd.com/44076405945.html#none";
         String text2 = "https://item.m.jd.com/product/51138623981.html?wxa_abtest=o&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share";
+
+        /*TreeMap<String, String> treeMap = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Double a = Double.valueOf(o1);
+                Double b = Double.valueOf(o2);
+                if(b - a > 0) {
+                    return 1;
+                }else if(b - a == 0) {
+                    return 0;
+                }else {
+                    return -1;
+                }
+            }
+        });
+
+        treeMap.put("1000", "10");
+        treeMap.put("10.25", "22");
+        treeMap.put("11.00", "333");
+        treeMap.put("1", "444");
+        treeMap.put("5000", "555");
+
+        double a = 1300d;
+
+        for (String quota : treeMap.keySet()) {
+            if(a >= Double.valueOf(quota)) {
+                System.out.println(a+"----"+quota);
+                break;
+            }
+        }*/
+
     }
 }

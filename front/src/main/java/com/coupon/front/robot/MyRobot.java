@@ -46,7 +46,7 @@ public class MyRobot extends WeChatBot {
                 //判断是京东商品分享链接
                 if(TbkUtils.isJdLink(textInfo)) {
                     //发送提示消息
-                    this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
+                    this.sendMsg(message.getFromUserName(), "正在查询【京东商品】优惠券,请稍候...");
                     String jdRebateMessage = miaoYouJuanService.getjdunionitems(textInfo);
                     if(jdRebateMessage != null) {
                         this.sendMsg(message.getFromUserName(), jdRebateMessage);
@@ -71,7 +71,7 @@ public class MyRobot extends WeChatBot {
                 //1.淘口令类型【淘宝商品分享链接文字包含有淘口令查询优惠】
                 if(pattern != null) {
                     //发送提示消息
-                    this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
+                    this.sendMsg(message.getFromUserName(), "正在查询【淘宝商品】优惠券,请稍候...");
                     String couponMessage = miaoYouJuanService.getitemgyurlbytpwd(pattern);
                     if(couponMessage != null) {
                         this.sendMsg(message.getFromUserName(), couponMessage);
@@ -83,7 +83,7 @@ public class MyRobot extends WeChatBot {
                     //输入 . 会查询出一款商品,是个bug吧!!!!!!!!!!!!!!!!!!!!!!!!!
                     if(TbkUtils.isTaobaoLink(textInfo)) {//淘宝链接,二合一链接等进入接口查询
                         //发送提示消息
-                        this.sendMsg(message.getFromUserName(), "正在查询优惠券,请稍候...");
+                        this.sendMsg(message.getFromUserName(), "正在查询【淘宝商品】优惠券,请稍候...");
                         String couponMessage = miaoYouJuanService.getgyurlbyall(textInfo);
                         if(couponMessage != null) {
                             this.sendMsg(message.getFromUserName(), couponMessage);

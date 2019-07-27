@@ -1,6 +1,9 @@
 package com.coupon.core.utils;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @ProjectName: workspace_coupon
@@ -110,12 +113,25 @@ public class PriceUtils {
      * @param commissionShare
      * @return
      */
-    public static Double rebateJdPrice(String commission, String commissionShare) {
+    public static Double rebateJdPrice(String commission, String commissionShare, String price, TreeMap<String, String> treeMap) {
         Double rebatePrice = 0d;
         //将各个参数String转BigDecimal后进行高精度计算
         BigDecimal bCommission = new BigDecimal(commission == null ? "0" : commission);
         BigDecimal bCommissionShare = new BigDecimal(commissionShare == null ? "0" : commissionShare);
+        BigDecimal bPrice = new BigDecimal(price == null ? "0" : price);
+        BigDecimal discount = new BigDecimal(0);
+        //根据商品原价获取最高可用优惠券
+        for (String quota : treeMap.keySet()) {
+            BigDecimal bQuota = new BigDecimal(price == null ? "0" : price);
+            if(bPrice.compareTo(bQuota) >= 0) {
+                discount = new BigDecimal(treeMap.get(quota));
+                break;
+            }
+        }
 
+        BigDecimal percentage = new BigDecimal("0.01");
+        BigDecimal finalPrice = bPrice.subtract(discount);
+        BigDecimal finalCommission = finalPrice.multiply(bCommissionShare).multiply(percentage);
         /**
          * 返利用户规则;
          * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
@@ -137,24 +153,24 @@ public class PriceUtils {
         BigDecimal zeroRatio = new BigDecimal("0.00");
 
         //【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
-        if(bCommission.compareTo(zeroRatio) > 0 && bCommission.compareTo(oneRatio) <= 0) {
-            rebatePrice = bCommission.multiply(oneRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        if(finalCommission.compareTo(zeroRatio) > 0 && finalCommission.compareTo(oneRatio) <= 0) {
+            rebatePrice = finalCommission.multiply(oneRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
-        if(bCommission.compareTo(oneRatio) > 0 && bCommission.compareTo(fiveRatio) <= 0) {
-            rebatePrice = bCommission.multiply(zeroNineRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        if(finalCommission.compareTo(oneRatio) > 0 && finalCommission.compareTo(fiveRatio) <= 0) {
+            rebatePrice = finalCommission.multiply(zeroNineRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.8;
-        if(bCommission.compareTo(fiveRatio) > 0 && bCommission.compareTo(twentyRatio) <= 0) {
-            rebatePrice = bCommission.multiply(zeroEightRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        if(finalCommission.compareTo(fiveRatio) > 0 && finalCommission.compareTo(twentyRatio) <= 0) {
+            rebatePrice = finalCommission.multiply(zeroEightRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.6;
-        if(bCommission.compareTo(twentyRatio) > 0 && bCommission.compareTo(fiftyRatio) <= 0) {
-            rebatePrice = bCommission.multiply(zeroSixRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        if(finalCommission.compareTo(twentyRatio) > 0 && finalCommission.compareTo(fiftyRatio) <= 0) {
+            rebatePrice = finalCommission.multiply(zeroSixRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【5】 所得返利 > 50.00元, 返利系数 0.5;
-        if(bCommission.compareTo(fiftyRatio) > 0) {
-            rebatePrice = bCommission.multiply(zeroFiveRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        if(finalCommission.compareTo(fiftyRatio) > 0) {
+            rebatePrice = finalCommission.multiply(zeroFiveRatio).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         return rebatePrice;
     }

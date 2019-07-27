@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ProjectName: workspace_coupon
@@ -313,6 +310,20 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         //优惠券信息，返回内容为空说明该SKU无可用优惠券
                         JSONObject couponInfo = object.getJSONObject("couponInfo");
                         StringBuffer cb = new StringBuffer();
+                        TreeMap<String, String> treeMap = new TreeMap<>(new Comparator<String>() {
+                            @Override
+                            public int compare(String o1, String o2) {
+                                Double a = Double.valueOf(o1);
+                                Double b = Double.valueOf(o2);
+                                if(b - a > 0) {
+                                    return 1;
+                                }else if(b - a == 0) {
+                                    return 0;
+                                }else {
+                                    return -1;
+                                }
+                            }
+                        });
                         if(couponInfo != null && couponInfo.size() != 0) {
                             JSONArray couponList = couponInfo.getJSONArray("couponList");//优惠券合集
                             for(int j = 0; j < couponList.size(); j++) {
@@ -341,6 +352,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 String platformType = couponObject.getString("platformType");
                                 //券消费限额
                                 String quota = couponObject.getString("quota");
+                                treeMap.put(quota, discount);
                                 //领取开始时间
                                 //String getStartTime = couponObject.getString("getStartTime");
                                 //券领取结束时间
@@ -413,7 +425,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 //显示商品价格
                                 sb.append("【价格】").append(price).append("元\n");
                                 //返利给客户金额;预估最多返利
-                                Double rebateJdPrice = PriceUtils.rebateJdPrice(commission, commissionShare);
+                                Double rebateJdPrice = PriceUtils.rebateJdPrice(commission, commissionShare, price, treeMap);
                                 sb.append("【预估返利】").append(rebateJdPrice).append("元\n");
                                 //优惠券
                                 if(StringUtils.isNotBlank(cb.toString())) {
@@ -580,9 +592,9 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             //原价
                             sb.append("【原价】").append(reservePrice).append("元\n");
                             //折扣价
-                            sb.append("【折扣价】").append(zkFinalPrice).append("元\n");
+                            sb.append("【现价】").append(zkFinalPrice).append("元\n");
                         }else {
-                            sb.append("【价格】").append(reservePrice).append("元\n");
+                            sb.append("【现价】").append(reservePrice).append("元\n");
                         }
                         //返利给客户金额;预估最多返利
                         Double rebatePrice;
