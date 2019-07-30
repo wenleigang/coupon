@@ -32,7 +32,7 @@ $(function () {
                     $("#postReservePrice").html(data.reservePrice);
                     $("#copyItemUrl").attr("src", data.pictUrl);
                     shortUrl = data.shortUrl;
-                    shareUrl = ctx + "/tb/goodsInfoUi/"+data.itemId;
+                    shareUrl = "http://www.findcoupon.top/tb/goodsInfoUi/"+data.itemId;
                     if(data.userType == 0) {
                         $("#storeType").attr("src", ctx+"/static/image/icon/taobao_logo.png");
                     }

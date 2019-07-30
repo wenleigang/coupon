@@ -13,6 +13,8 @@ package com.coupon.core.common;
  * @Version: 1.0
  */
 public interface Constants {
+    //网站域名
+    String MAIN_URL = "http://www.findcoupon.top";//网站主域名
     //===================== 请求相关参数定义 ===================================================================
     String CONTEXT_PATH = "ctx"; //当前项目根地址
     String BACK_URL = "backURL"; //请求的上一次的地址

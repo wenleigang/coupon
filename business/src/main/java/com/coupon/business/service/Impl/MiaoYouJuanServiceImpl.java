@@ -34,7 +34,7 @@ import java.util.*;
 public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
 
 
-    public static final String BASE_PATH = "http://47.98.133.210:8081/tb/goodsInfoUi/";
+    public static final String BASE_PATH = "http://www.findcoupon.top/tb/goodsInfoUi/";
 
     //高佣转链接API(淘口令)
     @Override
