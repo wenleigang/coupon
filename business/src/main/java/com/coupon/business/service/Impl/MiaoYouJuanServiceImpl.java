@@ -426,7 +426,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 sb.append("【价格】").append(price).append("元\n");
                                 //返利给客户金额;预估最多返利
                                 Double rebateJdPrice = PriceUtils.rebateJdPrice(commission, commissionShare, price, treeMap);
-                                sb.append("【预估返利】").append(rebateJdPrice).append("元\n");
+                                sb.append("【最高返利】").append(rebateJdPrice).append("元\n");
                                 //优惠券
                                 if(StringUtils.isNotBlank(cb.toString())) {
                                     sb.append("【优惠券】").append(cb.toString()).append("\n");
@@ -604,7 +604,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             rebatePrice = PriceUtils.rebatePrice(reservePrice, zkFinalPrice, null, null, maxCommissionRate);
                         }
                         if(rebatePrice > 0) {
-                            sb.append("【预估返利】").append(rebatePrice).append("元\n");
+                            sb.append("【最高返利】").append(rebatePrice).append("元\n");
                         }
                         if(hasCoupon) {
                             //优惠券

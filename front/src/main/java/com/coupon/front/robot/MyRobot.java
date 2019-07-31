@@ -126,8 +126,6 @@ public class MyRobot extends WeChatBot {
             StringBuffer sb = new StringBuffer();
             sb.append("【微信昵称:】").append(message.getFromNickName() == null ? "未知" : message.getFromNickName()).append("\n");
             sb.append("添加好友");
-            this.sendMsgToFileHelper(sb.toString());
-            this.sendMsg(message.getFromUserName(), "感谢您的使用呀！返利教程:http://www.findcoupon.top/docs/tbAppHelp");
         }
     }
 }
