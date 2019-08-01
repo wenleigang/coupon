@@ -77,10 +77,10 @@ public class PriceUtils {
          * 返利用户规则;
          * 所得佣金都需要乘0.8的系数,因为淘宝会抽成技术服务费以及个税等;
          * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
-         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.85;
-         * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.75;
-         * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.65;
-         * 【5】 所得返利 > 50.00元, 返利系数 0.55;
+         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.90;
+         * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.85;
+         * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.7;
+         * 【5】 所得返利 > 50.00元, 返利系数 0.6;
          */
 
         //此计算结果均为最高佣金,如为初级账户,走通用佣金(强烈不建议初级账号使用此结算标准为用户返利!!!!)
@@ -91,21 +91,21 @@ public class PriceUtils {
         if(customPrice.compareTo(ZERO_RATIO) > 0 && customPrice.compareTo(ONE_RATIO) <= 0) {
             rebatePrice = customPrice.multiply(ONE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.85;
+        //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
         if(customPrice.compareTo(ONE_RATIO) > 0 && customPrice.compareTo(FIVE_RATIO) <= 0) {
+            rebatePrice = customPrice.multiply(ZERO_NINE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.85;
+        if(customPrice.compareTo(FIVE_RATIO) > 0 && customPrice.compareTo(TWENTY_RATIO) <= 0) {
             rebatePrice = customPrice.multiply(ZERO_EIGHT_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.75;
-        if(customPrice.compareTo(FIVE_RATIO) > 0 && customPrice.compareTo(TWENTY_RATIO) <= 0) {
-            rebatePrice = customPrice.multiply(ZERO_SEVEN_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        }
-        //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.65;
+        //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.7;
         if(customPrice.compareTo(TWENTY_RATIO) > 0 && customPrice.compareTo(FIFTY_RATIO) <= 0) {
-            rebatePrice = customPrice.multiply(ZERO_SIX_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = customPrice.multiply(ZERO_SEVEN_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //【5】 所得返利 > 50.00元, 返利系数 0.55;
+        //【5】 所得返利 > 50.00元, 返利系数 0.6;
         if(customPrice.compareTo(FIFTY_RATIO) > 0) {
-            rebatePrice = customPrice.multiply(ZERO_FIVE_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = customPrice.multiply(ZERO_SIX_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         return rebatePrice;
     }
@@ -139,8 +139,8 @@ public class PriceUtils {
          * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
          * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
          * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.8;
-         * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.6;
-         * 【5】 所得返利 > 50.00元, 返利系数 0.5;
+         * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.7;
+         * 【5】 所得返利 > 50.00元, 返利系数 0.6;
          */
 
         //【1】 1.0元 >= 所得返利 > 0元, 返利系数 1.0;
@@ -155,13 +155,13 @@ public class PriceUtils {
         if(finalCommission.compareTo(FIVE_RATIO) > 0 && finalCommission.compareTo(TWENTY_RATIO) <= 0) {
             rebatePrice = finalCommission.multiply(ZERO_EIGHT_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.6;
+        //【4】50.00元 >= 所得返利 > 20.00元, 返利系数 0.7.5;
         if(finalCommission.compareTo(TWENTY_RATIO) > 0 && finalCommission.compareTo(FIFTY_RATIO) <= 0) {
-            rebatePrice = finalCommission.multiply(ZERO_SIX_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = finalCommission.multiply(ZERO_SEVEN_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
-        //【5】 所得返利 > 50.00元, 返利系数 0.5;
+        //【5】 所得返利 > 50.00元, 返利系数 0.6.5;
         if(finalCommission.compareTo(FIFTY_RATIO) > 0) {
-            rebatePrice = finalCommission.multiply(ZERO_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = finalCommission.multiply(ZERO_SIX_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         return rebatePrice;
     }
