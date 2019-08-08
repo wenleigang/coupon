@@ -106,8 +106,12 @@ public interface Constants {
     //万能高佣转链API接口
     String GY_ALL = TBK_URL+"/getgyurlbyall?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&content=";
 
-    // 好券直播API
+    //好券直播API
     String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
+
+    //https://api.open.21ds.cn/apiv1/gettkmaterial?apkey=177982ef-f5bc-0b00-b2e9-2430763ffd67&adzoneid=1000&siteid=2000&tbname=xxxxx
+    //获取全网淘客商品API
+    String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=";
 
     //(新版京东)京东商品查询API
     String JD_ITEM_INFO = "https://api.open.21ds.cn/jd_api_v1/getjdunionitems?apkey="+MYJ_APKEY+"&skuIds=";

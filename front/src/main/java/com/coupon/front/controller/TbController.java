@@ -95,4 +95,16 @@ public class TbController {
         }
     }
 
+    @RequestMapping(value = "/searchGoodsList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, Object>> searchGoodsList(String keyword, Integer pageno) {
+        try {
+            List<Map<String, Object>> list = miaoYouJuanService.gettkmaterial(keyword, pageno);
+            return list;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

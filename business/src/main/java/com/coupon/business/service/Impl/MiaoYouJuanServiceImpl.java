@@ -454,6 +454,48 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
         return null;
     }
 
+    @Override
+    public List<Map<String, Object>> gettkmaterial(String keyword, Integer pageno) throws Exception {
+        List<Map<String, Object>> list = new ArrayList<>();
+        //获取全网淘客商品API
+        String text = Constants.TK_MATERIAL.replace("keywordText", keyword);
+        String contentUrl = text+pageno;
+        //发送请求返回数据
+        String listData = HttpClientUtils.sendGet(contentUrl);
+        if(StringUtils.isNotBlank(listData)) {
+            JSONObject listJsonObject = JSON.parseObject(listData);
+            if(listJsonObject.getInteger("code") == 200) {
+                JSONArray jsonArrayData = (JSONArray)listJsonObject.get("data");
+                for(int i = 0; i < jsonArrayData.size(); i++) {
+                    JSONObject object = jsonArrayData.getJSONObject(i);
+                    Map<String, Object> map = new HashMap<>();
+                    //商品ID
+                    map.put("numIid", object.getLong("num_iid"));
+                    //商品主图
+                    map.put("pictUrl", object.getString("pict_url"));
+                    //商品标题
+                    map.put("title", object.getString("title"));
+                    //30天销量
+                    map.put("volume", object.getLong("volume"));
+                    //优惠券总量
+                    map.put("couponTotalCount", object.getLong("coupon_total_count"));
+                    //优惠券剩余量
+                    map.put("couponRemainCount", object.getLong("coupon_remain_count"));
+                    //折扣价
+                    map.put("zkFinalPrice", object.getDouble("zk_final_price"));
+                    //优惠券面额
+                    map.put("youhuiquan", object.getDouble("youhuiquan"));
+                    //优惠券使用条件，如：满XX元使用
+                    map.put("quanlimit", object.getDouble("quanlimit"));
+                    //优惠券信息
+                    map.put("couponInfo", object.getString("coupon_info"));
+                    list.add(map);
+                }
+            }
+        }
+        return list;
+    }
+
     //组装返回优惠信息
     private String packageCouponMessage(String couponData) {
         if(StringUtils.isNotBlank(couponData)) {

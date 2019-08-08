@@ -121,11 +121,9 @@ public class MyRobot extends WeChatBot {
      */
     @Bind(msgType = MsgType.ADD_FRIEND)
     public void addFriend(WeChatMessage message) {
-        if(message.getText().contains("嗨淘")) {
-            this.api().verify(message.getRaw().getRecommend());
-            StringBuffer sb = new StringBuffer();
-            sb.append("【微信昵称:】").append(message.getFromNickName() == null ? "未知" : message.getFromNickName()).append("\n");
-            sb.append("添加好友");
-        }
+        this.api().verify(message.getRaw().getRecommend());
+        StringBuffer sb = new StringBuffer();
+        sb.append("【添加好友:】").append(message.getFromNickName() == null ? "未知" : message.getFromNickName()).append(":")
+        .append(message.getText());
     }
 }

@@ -37,4 +37,7 @@ public interface MiaoYouJuanService {
 
     //(新版)获取商品推广链接
     String getitemcpsurl() throws Exception;
+
+    //获取全网淘客商品API
+    List<Map<String,Object>> gettkmaterial(String keyword, Integer pageno) throws Exception;
 }
