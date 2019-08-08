@@ -77,7 +77,7 @@
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/findcoupon.png">
             </div>
             <div class="c_header_text">
-                <input type="text" id="search" placeholder="请输入" onBlur="search()">
+                <input id="keyword" type="search" placeholder="请输入"/>
             </div>
             <div class="c_header_icon" onclick="toJdHelpUi()">
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/course.png">
@@ -129,7 +129,7 @@
             }
 
             function initData(pageno) {
-                var text = $("#search").val();
+                var text = $("#keyword").val();
                 if(text == undefined || text == "") {
                     text = ".";
                 }
@@ -195,9 +195,14 @@
                 window.location.href = ctx + "/docs/tbAppHelp";
             }
 
-            function search() {
-                pulldownRefresh();
-            }
+            $(function () {
+                $("#keyword").on('keypress',function(e) {
+                    var keycode = e.keyCode;
+                    if(keycode=='13') {
+                        pulldownRefresh()
+                    }
+                });
+            })
         </script>
     </body>
 </html>
