@@ -77,7 +77,10 @@
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/findcoupon.png">
             </div>
             <div class="c_header_text">
-                <input id="keyword" type="search" placeholder="请输入"/>
+                <form action="#" >
+                    <input id="keyword" type="search" placeholder="请输入"/>
+                    <input type="text" style="display:none;"/>
+                </form>
             </div>
             <div class="c_header_icon" onclick="toJdHelpUi()">
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/course.png">
@@ -199,7 +202,8 @@
                 $("#keyword").on('keypress',function(e) {
                     var keycode = e.keyCode;
                     if(keycode=='13') {
-                        pulldownRefresh()
+                        pulldownRefresh();
+                        document.activeElement.blur();  // 关闭软键盘
                     }
                 });
             })
