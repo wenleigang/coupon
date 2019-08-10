@@ -459,6 +459,14 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
         List<Map<String, Object>> list = new ArrayList<>();
         //获取全网淘客商品API
         String encode = URLEncoder.encode(keyword, "UTF-8");
+        /*
+            &keyword=keywordText
+            &pageno=pagenoText
+            &sort=sortText
+            &isoverseas=isoverseasText
+            &istmall=istmallText
+            &hascoupon=hascouponText";
+        */
         String text = Constants.TK_MATERIAL.replace("keywordText", encode);
         String contentUrl = text+pageno;
         //发送请求返回数据

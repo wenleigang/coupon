@@ -111,6 +111,7 @@ public interface Constants {
 
     //https://api.open.21ds.cn/apiv1/gettkmaterial?apkey=177982ef-f5bc-0b00-b2e9-2430763ffd67&adzoneid=1000&siteid=2000&tbname=xxxxx
     //获取全网淘客商品API
+    //String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=pagenoText&sort=sortText&isoverseas=isoverseasText&istmall=istmallText&hascoupon=hascouponText";
     String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=";
 
     //(新版京东)京东商品查询API

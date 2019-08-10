@@ -1,0 +1,18 @@
+.c_header { width: 100%; top: 0px; height: 50px; position: fixed; background-color: #ed6d27; overflow: auto;}
+.c_header_icon {float: left; width: 13%; text-align: center;}
+.c_header_text {float: left; width: 74%; text-align: center; line-height: 50px; color: #ffffff;}
+.c_header_text input {height: 33px; margin: 0; border-radius: 10px; color: #0f0f0f;}
+.c_header_icon_logo {width: 30px; margin-top: 10px;}
+.c_footer {width: 100%; bottom: 0px; height: 15px; line-height: 15px; text-align: center; position: fixed; background-color: #ed6d27; overflow: auto; font-size: 12px;}
+.c_footer a {color: #ffffff}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {border-top: 0; border-bottom: 0;}
+.mui-segmented-control.mui-scroll-wrapper .mui-control-item {padding: 0 18px;}
+.c_itemBox {float: left; width: 50vw;}
+.c_itemDom {padding: 5px; background-color: #EFEFF4}
+.c_itemImage {height: 50vw; overflow:hidden; border-radius: 10px 10px 0 0; background-color: #ffffff;}
+.c_itemImage img {width: 100%;}
+.c_itemInfo {background-color: #ffffff; border-radius: 0 0 10px 10px; padding: 5px; height: 90px;}
+.c_infoTitle {font-weight: bolder; font-size: 12px; overflow:hidden; text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical; -webkit-line-clamp:2; line-height: normal;}
+.c_infoReservePrice {font-size: 12px; color: #8c8c8c; text-decoration:line-through;}
+.c_infoNowPrice {font-size: 15px; color: #ed6d27; margin: 0 10px 0 0;}
+.c_infoVolume {font-size: 12px; color: #8c8c8c;}
