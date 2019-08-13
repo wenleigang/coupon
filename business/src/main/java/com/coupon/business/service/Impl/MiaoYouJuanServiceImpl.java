@@ -455,7 +455,8 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
     }
 
     @Override
-    public List<Map<String, Object>> gettkmaterial(String keyword, Integer pageno) throws Exception {
+    public List<Map<String, Object>> gettkmaterial(String keyword, Integer pageno, Integer defaultTag,
+            Integer priceTag, Integer numberTag, Integer tmalltTag, Integer couponTag) throws Exception {
         List<Map<String, Object>> list = new ArrayList<>();
         //获取全网淘客商品API
         String encode = URLEncoder.encode(keyword, "UTF-8");
@@ -463,12 +464,35 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
             &keyword=keywordText
             &pageno=pagenoText
             &sort=sortText
-            &isoverseas=isoverseasText
             &istmall=istmallText
             &hascoupon=hascouponText";
+            排序_des（降序），排序_asc（升序），销量（total_sales），价格（price）
         */
         String text = Constants.TK_MATERIAL.replace("keywordText", encode);
         String contentUrl = text+pageno;
+        if(defaultTag == 0) {//
+            String tempStr = "&sort=";
+            if(priceTag == 1 && numberTag == 0) {//价格降序
+                tempStr += "price_des";
+            }
+            if(priceTag == 2 && numberTag == 0) {//价格升序
+                tempStr += "price_asc";
+            }
+            if(numberTag == 1 && priceTag == 0) {//销量降序
+                tempStr += "total_sales_des";
+            }
+            if(numberTag == 2 && priceTag == 0) {//销量升序
+                tempStr += "total_sales_asc";
+            }
+            contentUrl += tempStr;
+        }
+        if(tmalltTag == 1) {
+            contentUrl += "&istmall=true";
+        }
+        if(couponTag == 1) {
+            contentUrl += "&hascoupon=true";
+        }
+        System.err.println(contentUrl);
         //发送请求返回数据
         String listData = HttpClientUtils.sendGet(contentUrl);
         if(StringUtils.isNotBlank(listData)) {

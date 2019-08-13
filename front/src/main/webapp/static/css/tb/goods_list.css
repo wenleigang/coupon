@@ -1,12 +1,23 @@
+.c_container { height: 100%; overflow: auto; background-color: #efeff4; width: 100%;}
 .c_header { width: 100%; top: 0px; height: 50px; position: fixed; background-color: #ed6d27; overflow: auto;}
 .c_header_icon {float: left; width: 13%; text-align: center;}
-.c_header_text {float: left; width: 74%; text-align: center; line-height: 50px; color: #ffffff;}
-.c_header_text input {height: 33px; margin: 0; border-radius: 10px; color: #0f0f0f;}
+.c_header_text {float: left; width: 74%; text-align: center; line-height: 50px; color: #ffffff; position: relative;}
+.c_header_text input {height: 33px; margin: 0; border-radius: 10px; color: #0f0f0f; background-color: #ffffff;}
+.c_header_text img {position: absolute; top:13px; right:5px; width: 25px; display: none;}
 .c_header_icon_logo {width: 30px; margin-top: 10px;}
 .c_footer {width: 100%; bottom: 0px; height: 15px; line-height: 15px; text-align: center; position: fixed; background-color: #ed6d27; overflow: auto; font-size: 12px;}
 .c_footer a {color: #ffffff}
-.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {border-top: 0; border-bottom: 0;}
-.mui-segmented-control.mui-scroll-wrapper .mui-control-item {padding: 0 18px;}
+.c_search {width: 100%; top: 50px; height: 40px; position: fixed; overflow: auto;}
+.c_search_left {float: left; width: 60%;}
+.c_search_left_item {background-color: #ffffff; margin: 5px 2px 0 4px; overflow: auto; border-radius: 2px;}
+.c_search_left_item_col_1 {width: 30%; margin: 0 1%; float: left; text-align: center; height: 30px; line-height: 30px; font-size: 13px;}
+.c_active_item {color: #d81e06; font-weight: bolder; border-bottom: 2px solid;}
+.c_search_left_item_col_2 {width: 32%; margin: 0 1%; float: left; text-align: center; height: 30px; line-height: 30px; font-size: 13px;}
+.c_search_left_item_col_2 img {height: 20px; vertical-align: middle; margin-top: -3px;}
+.c_search_right {float: left; width: 40%;}
+.c_search_right_item {background-color: #ffffff; margin: 5px 4px 0 2px; overflow: auto; border-radius: 2px;}
+.c_search_right_item_col {width: 48%; margin: 0 1%; float: left; text-align: center; height: 30px; line-height: 30px; font-size: 13px;}
+.c_search_right_item_col img {height: 15px; vertical-align: middle; margin-top: -3px;}
 .c_itemBox {float: left; width: 50vw;}
 .c_itemDom {padding: 5px; background-color: #EFEFF4}
 .c_itemImage {height: 50vw; overflow:hidden; border-radius: 10px 10px 0 0; background-color: #ffffff;}
@@ -16,3 +27,5 @@
 .c_infoReservePrice {font-size: 12px; color: #8c8c8c; text-decoration:line-through;}
 .c_infoNowPrice {font-size: 15px; color: #ed6d27; margin: 0 10px 0 0;}
 .c_infoVolume {font-size: 12px; color: #8c8c8c;}
+.c_screen_mask { z-index: 999; height: 100%; position: absolute; width: 100%; display: none;}
+.c_screen_mask_info {width: 50%; height: 60px; line-height: 60px; color: #ffffff; border-radius: 10px; background-color: rgba(0, 0, 0, 0.5);}

@@ -93,11 +93,23 @@ public class TbController {
         }
     }
 
+    /**
+     *
+     * @param keyword 关键字
+     * @param pageno 页码数
+     * @param defaultTag 默认 0 未选择 1选择默认
+     * @param priceTag 0 未选择 1价格降序 2价格升序
+     * @param numberTag 0 未选择 1销量降序 2销量升序
+     * @param tmalltTag 天猫商品 0 未选择 1天猫
+     * @param couponTag 优惠券 0 未选择 1优惠券
+     * @return
+     */
     @RequestMapping(value = "/searchGoodsList", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, Object>> searchGoodsList(String keyword, Integer pageno) {
+    public List<Map<String, Object>> searchGoodsList(String keyword, Integer pageno, Integer defaultTag,
+            Integer priceTag, Integer numberTag, Integer tmalltTag, Integer couponTag) {
         try {
-            List<Map<String, Object>> list = miaoYouJuanService.gettkmaterial(keyword, pageno);
+            List<Map<String, Object>> list = miaoYouJuanService.gettkmaterial(keyword, pageno, defaultTag, priceTag, numberTag, tmalltTag, couponTag);
             return list;
         }catch (Exception e) {
             e.printStackTrace();

@@ -39,5 +39,6 @@ public interface MiaoYouJuanService {
     String getitemcpsurl() throws Exception;
 
     //获取全网淘客商品API
-    List<Map<String,Object>> gettkmaterial(String keyword, Integer pageno) throws Exception;
+    List<Map<String,Object>> gettkmaterial(String keyword, Integer pageno, Integer defaultTag,
+        Integer priceTag, Integer numberTag, Integer tmalltTag, Integer couponTag) throws Exception;
 }

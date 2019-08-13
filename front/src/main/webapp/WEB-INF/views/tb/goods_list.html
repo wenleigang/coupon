@@ -2,15 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>商品列表</title>
+        <title>优惠商品</title>
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <script type="text/javascript">var ctx = '${ctx}'</script>
         <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/mui/css/mui.min.css">
         <link type="text/css" rel="stylesheet" href="${ctx}/static/css/tb/goods_list.css">
+        <link type="text/css" rel="stylesheet" href="${ctx}/static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
+    <body class="c_container">
+        <div id="mask" class="c_screen_mask" align="middle">
+            <div id="mask_info" class="c_screen_mask_info"></div>
+        </div>
         <div class="c_header">
             <div class="c_header_icon">
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/findcoupon.png">
@@ -18,6 +22,7 @@
             <div class="c_header_text">
                 <form action="#" >
                     <input id="keyword" type="search" placeholder="请输入"/>
+                    <img id="clearBtn" onclick="clearText()" src="${ctx}/static/image/icon/delete.png">
                     <input type="text" style="display:none;"/>
                 </form>
             </div>
@@ -25,28 +30,26 @@
                 <img class="c_header_icon_logo" src="${ctx}/static/image/icon/course.png">
             </div>
         </div>
-        <div class="mui-content">
-            <div id="slider" class="mui-slider mui-fullscreen">
-                <!--<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                    <div class="mui-scroll">
-                        <a class="mui-control-item mui-active" href="javascript:void(0)">默认</a>
-                        <a class="mui-control-item" href="javascript:void(0)">价格</a>
-                        <a class="mui-control-item" href="javascript:void(0)">销量</a>
-                        <a class="mui-control-item" href="javascript:void(0)">天猫</a>
-                        <a class="mui-control-item" href="javascript:void(0)">优惠券</a>
-                    </div>
-                </div>-->
-                <div class="mui-slider-group">
-                    <div id="itemMobile" class="mui-slider-item mui-control-content mui-active">
-                    <!--下拉刷新容器-->
-                        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-                            <div class="mui-scroll">
-                                <!--数据列表-->
-                                <ul class="mui-table-view mui-table-view-chevron"></ul>
-                            </div>
-                        </div>
-                    </div>
+        <div class="c_search">
+            <div class="c_search_left">
+                <div class="c_search_left_item">
+                    <div class="c_search_left_item_col_1 c_active_item" id="item_default" value="1">默认</div>
+                    <div class="c_search_left_item_col_2" id="item_price" value="0">价格&nbsp;<img src="${ctx}/static/image/icon/up_down.png"/></div>
+                    <div class="c_search_left_item_col_2" id="item_number" value="0">销量&nbsp;<img src="${ctx}/static/image/icon/up_down.png"/></div>
                 </div>
+            </div>
+            <div  class="c_search_right">
+                <div class="c_search_right_item">
+                    <div class="c_search_right_item_col" id="item_tmall" value="0"><img src="${ctx}/static/image/icon/unselect.png"/>&nbsp;天猫</div>
+                    <div class="c_search_right_item_col" id="item_coupon" value="0"><img src="${ctx}/static/image/icon/unselect.png"/>&nbsp;优惠券</div>
+                </div>
+            </div>
+        </div>
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <!--数据列表-->
+                <ul class="mui-table-view mui-table-view-chevron"></ul>
             </div>
         </div>
         <div class="c_footer">
