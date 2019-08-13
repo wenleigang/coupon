@@ -5,8 +5,8 @@
 .c_header_text input {height: 33px; margin: 0; border-radius: 10px; color: #0f0f0f; background-color: #ffffff;}
 .c_header_text img {position: absolute; top:13px; right:5px; width: 25px; display: none;}
 .c_header_icon_logo {width: 30px; margin-top: 10px;}
-.c_footer {width: 100%; bottom: 0px; height: 15px; line-height: 15px; text-align: center; position: fixed; background-color: #ed6d27; overflow: auto; font-size: 12px;}
-.c_footer a {color: #ffffff}
+.c_footer {width: 100%; bottom: 0px; height: 15px; line-height: 15px; text-align: center; position: fixed; background-color: #EFEFF4; overflow: auto; font-size: 12px;}
+.c_footer a {color: #9e9e9e;}
 .c_search {width: 100%; top: 50px; height: 40px; position: fixed; overflow: auto;}
 .c_search_left {float: left; width: 60%;}
 .c_search_left_item {background-color: #ffffff; margin: 5px 2px 0 4px; overflow: auto; border-radius: 2px;}
