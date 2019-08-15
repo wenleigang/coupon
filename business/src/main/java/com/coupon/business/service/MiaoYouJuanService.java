@@ -41,4 +41,7 @@ public interface MiaoYouJuanService {
     //获取全网淘客商品API
     List<Map<String,Object>> gettkmaterial(String keyword, Integer pageno, Integer defaultTag,
         Integer priceTag, Integer numberTag, Integer tmalltTag, Integer couponTag) throws Exception;
+
+    //生成相似推荐url
+    String getItemMoreUrl(String textInfo) throws Exception;
 }

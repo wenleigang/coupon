@@ -1,7 +1,9 @@
 package com.coupon.front.controller;
 
 import com.coupon.business.service.MiaoYouJuanService;
+import com.coupon.core.utils.JedisUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +40,16 @@ public class TbController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping(value = "/goodsListUi", method = RequestMethod.GET)
-    public ModelAndView goodsListUi(ModelAndView modelAndView) {
+    @RequestMapping(value = "/goodsListUi/{tag}", method = RequestMethod.GET)
+    public ModelAndView goodsListUi(ModelAndView modelAndView, @PathVariable("tag")String tag) {
+        String text = "";
+        if(tag != "list") {
+            String str = JedisUtils.get(tag);
+            if(StringUtils.isBlank(text)) {
+                text = str;
+            }
+        }
+        modelAndView.addObject("tag", text);
         modelAndView.setViewName("tb/goods_list");
         return modelAndView;
     }

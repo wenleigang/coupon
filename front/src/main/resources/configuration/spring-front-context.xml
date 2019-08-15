@@ -46,4 +46,7 @@
     <!-- 注解开发 -->
     <context:annotation-config></context:annotation-config>
 
+    <!-- datasource confing- -->
+    <import resource="spring-front-redis.xml"/>
+
 </beans>

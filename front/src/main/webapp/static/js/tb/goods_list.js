@@ -1,7 +1,6 @@
 /*初始化拉去数据页码*/
 var pageNum = 1;
 var loadingText = "<i class='fa fa-refresh fa-spin fa-x'></i><span style='font-size: medium'>&nbsp;&nbsp;加载中......</span>";
-
 /*上拉下拉刷新列表参数初始化*/
 mui.init({
     pullRefresh: {
@@ -41,6 +40,9 @@ function pulldownRefresh() {
 
 /*加载数据具体操作*/
 function initData(pageno) {
+    if(tag != "") {
+        $("#keyword").val(tag);
+    }
     /*获取搜索框文字*/
     var text = $("#keyword").val();//获取搜索框输入的文字
     if(text == undefined || text == "") {//如果第一次进来或者未输入任何文字

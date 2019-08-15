@@ -245,7 +245,7 @@ function doHome() {
     setTimeout(function () {
         $("#bottombar").fadeOut(1000);
     }, 3000)*/
-    window.location.href = ctx + "/tb/goodsListUi";
+    window.location.href = ctx + "/tb/goodsListUi/list";
 }
 
 var browser = {

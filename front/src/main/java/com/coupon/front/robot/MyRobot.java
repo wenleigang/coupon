@@ -51,7 +51,7 @@ public class MyRobot extends WeChatBot {
                     if(jdRebateMessage != null) {
                         this.sendMsg(message.getFromUserName(), jdRebateMessage);
                     }else {
-                        this.sendMsg(message.getFromUserName(), "分享商品已下架或暂无优惠!");
+                        this.sendMsg(message.getFromUserName(), "分享商品已下架或暂无优惠!\n【海量优惠】尽在 http://www.findcoupon.top");
                     }
                     return;
                 }
@@ -78,6 +78,11 @@ public class MyRobot extends WeChatBot {
                     }else {
                         this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券");
                     }
+                    //发送消息后,增加相似商品推荐,将textInfo转换成短信息,存入redis,返回链接
+                    String moreUrlInfo = miaoYouJuanService.getItemMoreUrl(textInfo);
+                    if(moreUrlInfo != null) {
+                        this.sendMsg(message.getFromUserName(), moreUrlInfo);
+                    }
                     return;
                 }else {//其他消息全部进入万能高佣转链API接口中查询
                     //输入 . 会查询出一款商品,是个bug吧!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -88,7 +93,7 @@ public class MyRobot extends WeChatBot {
                         if(couponMessage != null) {
                             this.sendMsg(message.getFromUserName(), couponMessage);
                         }else {
-                            this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券");
+                            this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券\n【海量优惠】尽在 http://www.findcoupon.top");
                         }
                         return;
                     }

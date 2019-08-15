@@ -6,12 +6,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.coupon.business.service.MiaoYouJuanService;
 import com.coupon.core.common.Constants;
 import com.coupon.core.utils.HttpClientUtils;
+import com.coupon.core.utils.JedisUtils;
 import com.coupon.core.utils.PriceUtils;
 import com.coupon.core.utils.TbkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
+
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
@@ -32,7 +37,6 @@ import java.util.*;
 @Transactional
 @Slf4j
 public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
-
 
     public static final String BASE_PATH = "http://www.findcoupon.top/tb/goodsInfoUi/";
 
@@ -435,9 +439,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 sb.append("【下单地址】\n").append(shortURL).append("\n");
                                 sb.append("------------------------------\n");
                                 //提示
-                                sb.append("点击【下单地址】跳转京东app下单!\n");
-                                sb.append("------------------------------\n");
-                                sb.append("【推广福利】发送订单截图立刻获得返利红包!");
+                                sb.append("点击【下单地址】跳转京东app下单!发送订单截图立刻获得返利红包!\n");
                                 return sb.toString();
                             }
                         }
@@ -556,6 +558,36 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
             }
         }
         return list;
+    }
+
+    @Override
+    public String getItemMoreUrl(String textInfo) throws Exception {
+        String searchText = null;
+        if(textInfo.contains("【海量优惠】")) {//自定义返回的文字
+            String[] split = textInfo.split("】");
+            searchText = split[0].substring(1);
+        }else {
+            if(textInfo.contains("https")) {
+                String[] split = textInfo.split("https");
+                searchText = split[0];
+            }
+        }
+        if(searchText == null) {
+            return null;
+        }else {
+            String tag = initTag();
+            JedisUtils.set(tag, searchText, 86400);//有效时长24小时
+            return "【相似推荐】点击 http://www.findcoupon.top/tb/goodsListUi/"+tag;
+        }
+    }
+
+    public String initTag() {
+        String tag = TbkUtils.randomTag();
+        if(JedisUtils.exists(tag)) {
+            return initTag();
+        }else {
+            return tag;
+        }
     }
 
     //组装返回优惠信息
@@ -691,20 +723,36 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         //显示商品价格
                         BigDecimal bReservePrice = new BigDecimal(reservePrice);
                         BigDecimal bZkFinalPrice = new BigDecimal(zkFinalPrice);
+                        BigDecimal bMiniPrice;
                         int compare = bReservePrice.compareTo(bZkFinalPrice);
                         if(compare == 1) {
-                            //原价
-                            sb.append("【原价】").append(reservePrice).append("元\n");
-                            //折扣价
-                            sb.append("【现价】").append(zkFinalPrice).append("元\n");
+                            bMiniPrice = bZkFinalPrice;
                         }else {
-                            sb.append("【现价】").append(reservePrice).append("元\n");
+                            bMiniPrice = bReservePrice;
                         }
                         //返利给客户金额;预估最多返利
                         Double rebatePrice;
                         if(hasCoupon) {
+                            BigDecimal bQuanLimit = new BigDecimal(quanlimit);
+                            BigDecimal bYouHuiJuan = new BigDecimal(youhuiquan);
+                            if(bMiniPrice.compareTo(bQuanLimit) >= 0) {//满足优惠条件
+                                //原价/折扣价
+                                sb.append("【原价/现价】").append(reservePrice).append("元/").append(zkFinalPrice).append("元\n");
+                                Double finalPrice = bMiniPrice.subtract(bYouHuiJuan).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                                //券后价格
+                                sb.append("【券后价】").append(finalPrice).append("元\n");
+                            }else {
+                                //原价
+                                sb.append("【原价】").append(reservePrice).append("元\n");
+                                //折扣价
+                                sb.append("【现价】").append(zkFinalPrice).append("元\n");
+                            }
                             rebatePrice = PriceUtils.rebatePrice(reservePrice, zkFinalPrice, quanlimit.toString(), youhuiquan.toString(), maxCommissionRate);
                         }else {
+                            //原价
+                            sb.append("【原价】").append(reservePrice).append("元\n");
+                            //折扣价
+                            sb.append("【现价】").append(zkFinalPrice).append("元\n");
                             rebatePrice = PriceUtils.rebatePrice(reservePrice, zkFinalPrice, null, null, maxCommissionRate);
                         }
                         if(rebatePrice > 0) {
@@ -725,10 +773,10 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             sb.append("------------------------------\n");
                             //淘口令
                             sb.append("手机復·制这段信息,").append(tpwd);
-                            sb.append("打开【淘♂寳♀】点击淘口令下单!\n");
+                            sb.append("打开【淘♂寳♀】点击淘口令下单!发送订单截图即得返利红包!\n");
                         }
                         sb.append("------------------------------\n");
-                        sb.append("【推广福利】发送订单截图立刻获得返利红包!");
+                        sb.append("【海量优惠】尽在 http://www.findcoupon.top");
                         return sb.toString();
                     }
                 }

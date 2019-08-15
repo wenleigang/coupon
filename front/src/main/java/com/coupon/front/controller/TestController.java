@@ -5,20 +5,13 @@ import com.coupon.business.service.MiaoYouJuanService;
 import com.coupon.business.service.TuLingService;
 import com.coupon.core.utils.TbkUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static java.util.logging.Level.parse;
 
 /**
  * @ProjectName: workspace_coupon
@@ -127,7 +120,47 @@ public class TestController {
         }
     }
 
+    @RequestMapping(value = "/redis")
+    @ResponseBody
+    public String shareConvetRedis(String text) {
+        try {
+            String itemMoreUrl = miaoYouJuanService.getItemMoreUrl(text);
+            return itemMoreUrl;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage().toString();
+        }
+    }
+
+    public static final Integer[] arr = {1,2,3,4,5,6,7,8,9};
+
+    public static int initTag() {
+        int ran1 = new Random().nextInt(10);
+        if(Arrays.asList(arr).contains(ran1)) {
+            return initTag();
+        }else {
+            return ran1;
+        }
+    }
+
+
     public static void main(String[] args) {
+        String textInfo8 = "【40个加粗衣架浸塑料成人防滑晾挂钩衣架子批发家用无痕衣撑衣服架】https://m.tb.cn/h.eTAIdtt?sm=6386f6 点击链接，再选择浏览器咑閞；或復·制这段描述€HNQQYT8LvGh€后到淘♂寳♀";
+        String text = "【红蜻蜓男鞋官方旗舰店男士皮鞋英伦风潮流商务正装真皮耐磨皮鞋子】\n" +
+                "【原价/现价】579元/299元\n" +
+                "【券后价】289.0元\n" +
+                "【最高返利】6.88元\n" +
+                "【优惠券】满199元减10元\n" +
+                "【电脑下单地址】\n" +
+                "https://s.click.taobao.com/SiVjJ3w\n" +
+                "------------------------------\n" +
+                "手机復·制这段信息,￥gJUvYQdNtD5￥打开【淘♂寳♀】领取优惠券并下单!\n" +
+                "------------------------------\n" +
+                "【海量优惠】尽在 http://www.findcoupon.top";
+
+
+        String[] split = text.split("】");
+        System.out.println(split[0]);
         /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
         String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
         String textInfo3 = "【2019春季 通城学典小学数学计算能手四年级下册北师大版 小学生4年级提升思维训练口算估算笔算练习册提升默写能力练习工具书/正版】https://m.tb.cn/h.e6r2ZGZ?sm=0f8da9 点击链接，再选择浏览器咑閞；或復·制这段描述¢OADFYTkmGcd¢后到淘♂寳♀";
@@ -144,6 +177,7 @@ public class TestController {
         String s6 = TbkUtils.extractTbCode(textInfo6);
         String s7 = TbkUtils.extractTbCode(textInfo7);
         String s8 = TbkUtils.extractTbCode(textInfo8);
+
         System.err.println(s1);
         System.err.println(s2);
         System.err.println(s3);
@@ -174,8 +208,8 @@ public class TestController {
         String s2 = TbkUtils.extractTbCode(textInfo2);
         System.err.println(s1);
         System.err.println(s2);*/
-        String text1 = "https://item.jd.com/44076405945.html#none";
-        String text2 = "https://item.m.jd.com/product/51138623981.html?wxa_abtest=o&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share";
+        /*String text1 = "https://item.jd.com/44076405945.html#none";
+        String text2 = "https://item.m.jd.com/product/51138623981.html?wxa_abtest=o&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share";*/
 
         /*TreeMap<String, String> treeMap = new TreeMap<>(new Comparator<String>() {
             @Override
@@ -206,6 +240,5 @@ public class TestController {
                 break;
             }
         }*/
-
     }
 }

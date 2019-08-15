@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -171,5 +172,28 @@ public class TbkUtils {
         }else {
             return null;
         }
+    }
+
+    /**
+     * 生成11位随机数工具
+     * @return
+     */
+    public static String randomTag () {
+        //生成随机数字和字母,
+        String val = "";
+        Random random = new Random();
+        //length为几位密码
+        for(int i = 0; i < 11; i++) {
+            String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+            //输出字母还是数字
+            if( "char".equalsIgnoreCase(charOrNum) ) {
+                //输出是大写字母还是小写字母
+                int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
+                val += (char)(random.nextInt(26) + temp);
+            } else if( "num".equalsIgnoreCase(charOrNum) ) {
+                val += String.valueOf(random.nextInt(10));
+            }
+        }
+        return val;
     }
 }
