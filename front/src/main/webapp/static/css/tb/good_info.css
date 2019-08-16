@@ -133,6 +133,15 @@
 .c_div_10px {
     height: 10px;
 }
+.c_red_content {
+    border-radius: 8px;
+    overflow: auto;
+    padding: 5px 5px;
+    background: linear-gradient(left, #ec1833, #ea521c);
+    background: -ms-linear-gradient(left, #ec1833, #ea521c);
+    background: -webkit-linear-gradient(left, #ec1833, #ea521c);
+    background: -moz-linear-gradient(left, #ec1833, #ea521c);
+}
 .c_coupon_content {
     border-radius: 8px;
     overflow: auto;

@@ -2,6 +2,7 @@ var shortUrl;
 var shareUrl;
 $(function () {
     $("#coupon_div").hide();
+    $("#red_div").hide();
     $("#coupon_div_bottom").hide();
     $.ajax({
         url: ctx + "/tb/goodsInfo/"+goodsId,
@@ -62,6 +63,9 @@ $(function () {
                     }
                     $("#nowPrice").html("￥"+truePrice);
                     $("#postNowPrice").html("￥"+truePrice);
+                    $("#red_info").html(data.rebatePrice+"元");
+                    $("#red_div").show();
+                    $("#postRedInfo").html("最高"+data.rebatePrice+"元现金红包");
                     if(data.hasCoupon) {
                         $("#twpCodeInfo").html("復·制"+data.tpwd+"这段描述后到淘♂寳♀,领取优惠券并下单;获得红包返利!");
                         $("#couponInfo").html(data.couponInfo);

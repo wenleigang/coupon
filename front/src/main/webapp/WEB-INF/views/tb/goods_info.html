@@ -41,9 +41,23 @@
     <div class="c_info_content">
         <span class="c_active_price_tag" id="nowPriceTag"></span><span class="c_active_price" id="nowPrice"></span>&nbsp;&nbsp;
         <span class="c_info_text">原价￥</span><span class="c_info_text c_info_disable" id="reservePriceInfo"></span><br/>
-        <span class="c_xs_tag" id="catNameInfo"></span><span class="c_xs_tag" id="catLeafNameInfo"></span>
+        <span class="c_xs_tag" id="catNameInfo"></span><span class="c_xs_tag" id="catLeafNameInfo"></span><br/>
     </div>
-    <!-- 价格标签 -->
+
+    <div class="c_div_10px"></div>
+
+    <!-- 优惠券信息 -->
+    <div id="red_div" class="c_info_content">
+        <div class="c_red_content">
+            <div>
+                <span style="color: #ffffff; font-size: 12px;">点击
+                <span style="color: #ffffff; font-size: 14px; color: #FFD700;">领券购买</span>;最高可得</span>
+                <span id="red_info" style="font-size: 20px; color: #FFD700"></span><span style="color: #ffffff; font-size: 12px;">现金红包 </span>
+                <span style="color: #ffffff; font-size: 14px; color: #FFD700;">!下单就返!</span><br/>
+                <!--<span style="color: #ffffff; font-size: 12px;">下单后发送订单截图给[<span style="color: #FFD700; font-size: 12px;">那些花儿(微信号:woshibing1992926)</span>]无需验证，即可获得红包</span>-->
+            </div>
+        </div>
+    </div>
 
     <div class="c_div_10px"></div>
 
@@ -54,15 +68,15 @@
                 <i class="fa fa-ticket c_info_color_white" aria-hidden="true"></i>&nbsp;<span class="c_sm_tag" id="couponInfo"></span>
             </div>
             <div class="c_coupon_num">
-                        <span class="c_coupon_text">
-                            <i class="fa fa-gift" aria-hidden="true"></i>&nbsp;劵:<span id="couponRemainCountInfo"></span>&nbsp;&nbsp;/<span id="couponTotalCountInfo"></span>张
-                        </span>
+                <span class="c_coupon_text">
+                    <i class="fa fa-gift" aria-hidden="true"></i>&nbsp;劵:<span id="couponRemainCountInfo"></span>&nbsp;&nbsp;/<span id="couponTotalCountInfo"></span>张
+                </span>
             </div>
             <div class="c_coupon_clear"></div>
             <div class="c_coupon_time">
-                        <span class="c_coupon_text">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;优惠券有效期:<span id="couponStartTimeInfo"></span>&nbsp;&nbsp;~<span id="couponEndTimeInfo"></span>
-                        </span>
+                <span class="c_coupon_text">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;优惠券有效期:<span id="couponStartTimeInfo"></span>&nbsp;&nbsp;~<span id="couponEndTimeInfo"></span>
+                </span>
             </div>
         </div>
     </div>
@@ -99,14 +113,21 @@
                     <span id="postNowPrice" style="color: #ed6d27; font-size: 70px;"></span><br/>
                     <span style="color: #8c8c8c; font-size: 40px;">原价￥</span>
                     <span id="postReservePrice" style="color: #8c8c8c; font-size: 40px;" class="c_info_disable"></span><br/>
-                    <span id="postCoupon" style="display: none;">
-                                <span style="background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;">劵</span>
-                                <span id="postCouponInfo" style="background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 50px;"></span>
-                            </span>
+                    <div id="postCoupon" style="display: none;">
+                        <span style="background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 40px;">劵</span>
+                        <span id="postCouponInfo" style="background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 40px;"></span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <span style="background-color: #ea521c; color: #ffffff; padding: 2px 20px; margin: 0; display:inline-block; font-size: 40px;">返</span>
+                        <span id="postRedInfo" style="background-color: #eeeeee; color: #ea521c; padding: 2px 20px; margin: 0; display:inline-block; font-size: 40px;"></span>
+                    </div>
                 </div>
                 <div style="float: left; width: 450px; padding: 10px; text-align: center;" id="qrcodeDiv">
-                    <span style="color: #ea521c; font-size: 30px;">长按识别二维码</span>
+                    <div style="color: #ea521c; font-size: 35px; margin-top: 20px;">长按识别二维码</div>
                 </div>
+            </div>
+            <div style="font-size: 40px; text-align: center; padding: 0 50px;">
+                下单后发送订单截图给<span style="color: #ea521c;">【那些花儿】</span>无需验证，即可获得红包<span style="color: #ea521c;">【微信号:woshibing1992926】</span>
             </div>
         </div>
         <div id="imageInfo" style="min-width: 300px;"></div>

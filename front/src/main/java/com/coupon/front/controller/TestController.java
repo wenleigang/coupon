@@ -160,7 +160,8 @@ public class TestController {
 
 
         String[] split = text.split("】");
-        System.out.println(split[0]);
+        String text1 = split[0].substring(1);
+        System.out.println(text1);
         /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
         String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
         String textInfo3 = "【2019春季 通城学典小学数学计算能手四年级下册北师大版 小学生4年级提升思维训练口算估算笔算练习册提升默写能力练习工具书/正版】https://m.tb.cn/h.e6r2ZGZ?sm=0f8da9 点击链接，再选择浏览器咑閞；或復·制这段描述¢OADFYTkmGcd¢后到淘♂寳♀";

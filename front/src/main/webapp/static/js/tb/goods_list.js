@@ -42,6 +42,7 @@ function pulldownRefresh() {
 function initData(pageno) {
     if(tag != "") {
         $("#keyword").val(tag);
+        $("#clearBtn").show();
     }
     /*获取搜索框文字*/
     var text = $("#keyword").val();//获取搜索框输入的文字
@@ -138,6 +139,7 @@ $(function () {
 })
 
 $("#keyword").on("input onpropertychange", function () {
+    tag == "";
     var text = $("#keyword").val();
     if(text != null && text != "") {
         $("#clearBtn").show();
@@ -150,6 +152,7 @@ $("#keyword").on("input onpropertychange", function () {
 function clearText() {
     $("#keyword").val("");
     $("#clearBtn").hide();
+    tag == "";
 }
 
 /*点击默认按钮触发事件*/

@@ -94,8 +94,10 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                 }
                 map.put("imageList", imageList);
                 //商品一口价格
+                String reservePrice = nTbkItemJson.getString("reserve_price");
                 map.put("reservePrice", nTbkItemJson.getString("reserve_price"));
                 //商品折扣价格
+                String zkFinalPrice = nTbkItemJson.getString("zk_final_price");
                 map.put("zkFinalPrice", nTbkItemJson.getString("zk_final_price"));
                 //卖家类型
                 //0表示淘宝店铺，1表示天猫店铺
@@ -158,6 +160,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         map.put("itemUrl", dataJson.getString("item_url"));
                         //高佣金比例
                         //计划中的最高佣金，如果阿里妈妈帐户为初级，则会走通用佣金
+                        String maxCommissionRate = dataJson.getString("max_commission_rate");
                         map.put("maxCommissionRate", dataJson.getString("max_commission_rate"));
                         //二合一链接
                         map.put("couponClickUrl", dataJson.getString("coupon_click_url"));
@@ -188,6 +191,8 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         //优惠券使用限制条件，即满xx元使用
                         Double quanlimit = null;
                         Boolean hasCoupon = dataJson.getBoolean("has_coupon");
+                        //返利给客户金额;预估最多返利
+                        Double rebatePrice;
                         if (hasCoupon) {
                             couponType = dataJson.getInteger("coupon_type");
                             couponStartTime = dataJson.getString("coupon_start_time");
@@ -197,7 +202,11 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             couponEndTime = dataJson.getString("coupon_end_time");
                             youhuiquan = dataJson.getDouble("youhuiquan");
                             quanlimit = dataJson.getDouble("quanlimit");
+                            rebatePrice = PriceUtils.rebatePrice(reservePrice, zkFinalPrice, quanlimit.toString(), youhuiquan.toString(), maxCommissionRate);
+                        }else {
+                            rebatePrice = PriceUtils.rebatePrice(reservePrice, zkFinalPrice, null, null, maxCommissionRate);
                         }
+                        map.put("rebatePrice", rebatePrice);
                         map.put("couponType", couponType);
                         map.put("couponStartTime", couponStartTime);
                         map.put("couponTotalCount", couponTotalCount);
@@ -439,7 +448,9 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                                 sb.append("【下单地址】\n").append(shortURL).append("\n");
                                 sb.append("------------------------------\n");
                                 //提示
-                                sb.append("点击【下单地址】跳转京东app下单!发送订单截图立刻获得返利红包!\n");
+                                sb.append("点击【下单地址】自动跳转京东app下单!发送订单截图即得返利红包!\n");
+                                sb.append("------------------------------\n");
+                                sb.append("【海量优惠】尽在 http://www.findcoupon.top");
                                 return sb.toString();
                             }
                         }
@@ -766,7 +777,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                             sb.append("------------------------------\n");
                             //淘口令
                             sb.append("手机復·制这段信息,").append(tpwd);
-                            sb.append("打开【淘♂寳♀】领取优惠券并下单!\n");
+                            sb.append("打开【淘♂寳♀】领取优惠券下单!发送订单截图即得返利红包!\n");
                         }else {
                             //电脑下单地址
                             sb.append("【电脑下单地址】\n").append(shortUrl).append("\n");
