@@ -93,18 +93,19 @@ public interface Constants {
     //===================== 淘宝客api详细接口 ========================================================================
     //淘宝客API请求地址
     String TBK_URL = "https://api.open.21ds.cn/apiv1";
+    String TBK_URL2 = "https://api.open.21ds.cn/apiv2";
 
     //高佣转链接API(淘口令)
-    String GY_TPWD = TBK_URL+"/getitemgyurlbytpwd?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&tpwdcode=";
+    String GY_TPWD = TBK_URL2+"/getitemgyurlbytpwd?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&tpwdcode=";
 
     //高佣转链接API(商品ID)
-    String GY_ITEMID = TBK_URL+"/getitemgyurl?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&itemid=";
+    String GY_ITEMID = TBK_URL2+"/getitemgyurl?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&itemid=";
 
     //获取简版淘客商品信息API
     String ITEM_INFO = TBK_URL+"/getiteminfo?apkey="+MYJ_APKEY+"&itemid=";
 
     //万能高佣转链API接口
-    String GY_ALL = TBK_URL+"/getgyurlbyall?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&content=";
+    String GY_ALL = TBK_URL2+"/getgyurlbyall?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&content=";
 
     //好券直播API
     String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";

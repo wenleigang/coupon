@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -63,8 +64,9 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
     //万能高佣转链API(任意文字分享格式)
     @Override
     public Map<String, String> getgyurlbyall(String textInfo) throws Exception {
+        String encode = URLEncoder.encode(textInfo, "UTF-8");
         //拼接万能高佣请求url
-        String contentUrl = Constants.GY_ALL+textInfo;
+        String contentUrl = Constants.GY_ALL+encode;
         //发送请求返回数据
         String couponData = HttpClientUtils.sendGet(contentUrl);
         //返回信息组装返回模板信息并返回
