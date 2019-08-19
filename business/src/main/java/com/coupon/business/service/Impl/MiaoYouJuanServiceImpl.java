@@ -10,6 +10,7 @@ import com.coupon.core.utils.JedisUtils;
 import com.coupon.core.utils.PriceUtils;
 import com.coupon.core.utils.TbkUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -64,7 +65,8 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
     //万能高佣转链API(任意文字分享格式)
     @Override
     public Map<String, String> getgyurlbyall(String textInfo) throws Exception {
-        String encode = URLEncoder.encode(textInfo, "UTF-8");
+        String unescapeHtml4 = StringEscapeUtils.unescapeHtml4(textInfo);
+        String encode = URLEncoder.encode(unescapeHtml4, "UTF-8");
         //拼接万能高佣请求url
         String contentUrl = Constants.GY_ALL+encode;
         //发送请求返回数据
