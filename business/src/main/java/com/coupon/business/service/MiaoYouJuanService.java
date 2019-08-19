@@ -18,10 +18,10 @@ import java.util.Map;
 public interface MiaoYouJuanService {
 
     //高佣转链接API(淘口令)
-    String getitemgyurlbytpwd(String tpwdcode) throws Exception;
+    Map<String, String> getitemgyurlbytpwd(String tpwdcode) throws Exception;
 
     //万能高佣转链API(任意文字分享格式)
-    String getgyurlbyall(String textInfo) throws Exception;
+    Map<String, String> getgyurlbyall(String textInfo) throws Exception;
 
     //获取简版淘客商品信息
     Map<String,Object> getiteminfo(String goodsId) throws Exception;

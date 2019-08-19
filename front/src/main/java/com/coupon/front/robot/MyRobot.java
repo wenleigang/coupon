@@ -11,6 +11,8 @@ import io.github.biezhi.wechat.api.model.WeChatMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Map;
+
 /**
  * @ProjectName: workspace_coupon
  * @Package: com.coupon.front.robot
@@ -72,16 +74,13 @@ public class MyRobot extends WeChatBot {
                 if(pattern != null) {
                     //发送提示消息
                     this.sendMsg(message.getFromUserName(), "正在查询【淘宝商品】优惠券,请稍候...");
-                    String couponMessage = miaoYouJuanService.getitemgyurlbytpwd(pattern);
-                    if(couponMessage != null) {
-                        this.sendMsg(message.getFromUserName(), couponMessage);
+                    Map<String, String> map = miaoYouJuanService.getitemgyurlbytpwd(textInfo);
+                    String couponInfo = map.get("couponInfo");
+                    String itemsUrl = map.get("itemsUrl");
+                    if(StringUtils.isNotBlank(couponInfo)) {
+                        this.sendMsg(message.getFromUserName(), couponInfo+"\n【相似推荐】点击 "+itemsUrl);
                     }else {
-                        this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券");
-                    }
-                    //发送消息后,增加相似商品推荐,将textInfo转换成短信息,存入redis,返回链接
-                    String moreUrlInfo = miaoYouJuanService.getItemMoreUrl(textInfo);
-                    if(moreUrlInfo != null) {
-                        this.sendMsg(message.getFromUserName(), moreUrlInfo);
+                        this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券\n【相似推荐】点击 "+itemsUrl);
                     }
                     return;
                 }else {//其他消息全部进入万能高佣转链API接口中查询
@@ -89,9 +88,9 @@ public class MyRobot extends WeChatBot {
                     if(TbkUtils.isTaobaoLink(textInfo)) {//淘宝链接,二合一链接等进入接口查询
                         //发送提示消息
                         this.sendMsg(message.getFromUserName(), "正在查询【淘宝商品】优惠券,请稍候...");
-                        String couponMessage = miaoYouJuanService.getgyurlbyall(textInfo);
-                        if(couponMessage != null) {
-                            this.sendMsg(message.getFromUserName(), couponMessage);
+                        Map<String, String> map = miaoYouJuanService.getgyurlbyall(textInfo);
+                        if(map != null) {
+                            this.sendMsg(message.getFromUserName(), map.get("couponInfo"));
                         }else {
                             this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券\n【海量优惠】尽在 http://www.findcoupon.top");
                         }

@@ -139,7 +139,7 @@ $(function () {
 })
 
 $("#keyword").on("input onpropertychange", function () {
-    tag == "";
+    tag = "";
     var text = $("#keyword").val();
     if(text != null && text != "") {
         $("#clearBtn").show();
@@ -152,7 +152,7 @@ $("#keyword").on("input onpropertychange", function () {
 function clearText() {
     $("#keyword").val("");
     $("#clearBtn").hide();
-    tag == "";
+    tag = "";
 }
 
 /*点击默认按钮触发事件*/

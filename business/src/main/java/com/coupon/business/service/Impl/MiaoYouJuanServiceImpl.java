@@ -42,21 +42,27 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
 
     //高佣转链接API(淘口令)
     @Override
-    public String getitemgyurlbytpwd(String tpwdcode) throws Exception {
-        if(StringUtils.isNotBlank(tpwdcode)) {
-            //拼接高佣转链接API
-            String tpwdcodeUrl = Constants.GY_TPWD+tpwdcode;
-            //发送请求返回数据
-            String couponData = HttpClientUtils.sendGet(tpwdcodeUrl);
-            //返回信息组装返回模板信息并返回
-            return packageCouponMessage(couponData);
+    public Map<String, String> getitemgyurlbytpwd(String textInfo) throws Exception {
+        String tpwdcode = TbkUtils.extractTbCode(textInfo);
+        //拼接高佣转链接API
+        String tpwdcodeUrl = Constants.GY_TPWD+tpwdcode;
+        //发送请求返回数据
+        String couponData = HttpClientUtils.sendGet(tpwdcodeUrl);
+        //返回信息组装返回模板信息并返回
+        Map<String, String> map = packageCouponMessage(couponData);
+        if(map == null) {
+            String keyword = TbkUtils.extractKeyword(textInfo);
+            String itemsUrl = getMoreItemsUrl(keyword);
+            map = new HashMap<>();
+            map.put("couponInfo", null);
+            map.put("itemsUrl", itemsUrl);
         }
-        return null;
+        return  map;
     }
 
     //万能高佣转链API(任意文字分享格式)
     @Override
-    public String getgyurlbyall(String textInfo) throws Exception {
+    public Map<String, String> getgyurlbyall(String textInfo) throws Exception {
         //拼接万能高佣请求url
         String contentUrl = Constants.GY_ALL+textInfo;
         //发送请求返回数据
@@ -592,17 +598,8 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
         }
     }
 
-    public String initTag() {
-        String tag = TbkUtils.randomTag();
-        if(JedisUtils.exists(tag)) {
-            return initTag();
-        }else {
-            return tag;
-        }
-    }
-
     //组装返回优惠信息
-    private String packageCouponMessage(String couponData) {
+    private Map<String, String> packageCouponMessage(String couponData) {
         if(StringUtils.isNotBlank(couponData)) {
             JSONObject jsonObject = JSON.parseObject(couponData);
             if(jsonObject.getInteger("code") == 200) {
@@ -673,7 +670,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         JSONObject itemDataJson = (JSONObject)itemJsonObject.get("data");
                         JSONObject nTbkItemJson = (JSONObject)itemDataJson.get("n_tbk_item");
                         //一级类目名称
-                        //String catName = nTbkItemJson.getString("cat_name");
+                        String catName = nTbkItemJson.getString("cat_name");
                         //商品id
                         //String numIid = nTbkItemJson.getString("num_iid");
                         //商品标题
@@ -705,7 +702,7 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         //店铺名称
                         //String nick = nTbkItemJson.getString("nick");
                         //叶子类目名称
-                        //String catLeafName = nTbkItemJson.getString("cat_leaf_name");
+                        String catLeafName = nTbkItemJson.getString("cat_leaf_name");
                         //是否加入消费者保障
                         //String isPrepay = nTbkItemJson.getString("is_prepay");
                         //店铺dsr 评分
@@ -788,11 +785,32 @@ public class MiaoYouJuanServiceImpl implements MiaoYouJuanService {
                         }
                         sb.append("------------------------------\n");
                         sb.append("【海量优惠】尽在 http://www.findcoupon.top");
-                        return sb.toString();
+                        Map<String, String> map = new HashMap<>();
+                        map.put("couponInfo", sb.toString());
+                        //保存并返回精准推荐
+                        String text = catName + "/" + catLeafName;
+                        String itemsUrl = getMoreItemsUrl(text);
+                        map.put("itemsUrl", itemsUrl);
+                        return map;
                     }
                 }
             }
         }
         return null;
+    }
+
+    private String getMoreItemsUrl(String text) {
+        String tag = initTag();
+        JedisUtils.set(tag, text, 86400);//有效时长24小时
+        return "http://www.findcoupon.top/tb/goodsListUi/"+tag;
+    }
+
+    private String initTag() {
+        String tag = TbkUtils.randomTag();
+        if(JedisUtils.exists(tag)) {
+            return initTag();
+        }else {
+            return tag;
+        }
     }
 }

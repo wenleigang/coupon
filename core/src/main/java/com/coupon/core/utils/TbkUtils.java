@@ -196,4 +196,21 @@ public class TbkUtils {
         }
         return val;
     }
+
+    /**
+     * 去除字符串中的空格、回车、换行符、制表符,最长35个字符长度
+     * @param str
+     * @return
+     */
+    public static String extractKeyword(String str) {
+        String dest = "";
+        if (str!=null) {
+            dest = str.replaceAll("[^a-zA-Z0-9\\u4E00-\\u9FA5]", "");  //去除数字，英文，汉字  之外的内容
+            //最多返回长度40
+            if(dest.length() > 35) {
+                dest = dest.substring(0, 35);
+            }
+        }
+        return dest;
+    }
 }
