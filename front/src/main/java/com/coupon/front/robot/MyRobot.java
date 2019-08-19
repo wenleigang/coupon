@@ -90,7 +90,9 @@ public class MyRobot extends WeChatBot {
                         this.sendMsg(message.getFromUserName(), "正在查询【淘宝商品】优惠券,请稍候...");
                         Map<String, String> map = miaoYouJuanService.getgyurlbyall(textInfo);
                         if(map != null) {
-                            this.sendMsg(message.getFromUserName(), map.get("couponInfo"));
+                            String couponInfo = map.get("couponInfo");
+                            String itemsUrl = map.get("itemsUrl");
+                            this.sendMsg(message.getFromUserName(), couponInfo+"\n【相似推荐】点击 "+itemsUrl);
                         }else {
                             this.sendMsg(message.getFromUserName(), "该商品已下架或暂无优惠券\n【海量优惠】尽在 http://www.findcoupon.top");
                         }
