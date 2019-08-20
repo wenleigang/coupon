@@ -19,6 +19,7 @@
 	</context:component-scan>
 
 	<!-- 静态资源访问 -->
+    <mvc:default-servlet-handler/>
 	<mvc:resources location="/static/" mapping="/static/**"/>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
