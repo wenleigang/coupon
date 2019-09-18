@@ -145,7 +145,7 @@ public class TestController {
 
 
     public static void main(String[] args) {
-        String textInfo8 = "【40个加粗衣架浸塑料成人防滑晾挂钩衣架子批发家用无痕衣撑衣服架】https://m.tb.cn/h.eTAIdtt?sm=6386f6 点击链接，再选择浏览器咑閞；或復·制这段描述€HNQQYT8LvGh€后到淘♂寳♀";
+        /*String textInfo8 = "【40个加粗衣架浸塑料成人防滑晾挂钩衣架子批发家用无痕衣撑衣服架】https://m.tb.cn/h.eTAIdtt?sm=6386f6 点击链接，再选择浏览器咑閞；或復·制这段描述€HNQQYT8LvGh€后到淘♂寳♀";
         String text = "【红蜻蜓男鞋官方旗舰店男士皮鞋英伦风潮流商务正装真皮耐磨皮鞋子】\n" +
                 "【原价/现价】579元/299元\n" +
                 "【券后价】289.0元\n" +
@@ -156,7 +156,7 @@ public class TestController {
                 "------------------------------\n" +
                 "手机復·制这段信息,￥gJUvYQdNtD5￥打开【淘♂寳♀】领取优惠券并下单!\n" +
                 "------------------------------\n" +
-                "【海量优惠】尽在 http://www.findcoupon.top";
+                "【海量优惠】尽在 http://www.findcoupon.top";*/
 
         /*String textInfo1 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述/CLVXYTNKYUg/后到淘♂寳♀";
         String textInfo2 = "【草本善野生红心番石榴茶 番石榴干片番石榴果芭乐干番石榴片 干片】https://m.tb.cn/h.e6tAbYD?sm=0eedde 点击链接，再选择浏览器咑閞；或復·制这段描述.CLVXYTNKYUg.后到淘♂寳♀";
@@ -237,5 +237,9 @@ public class TestController {
                 break;
             }
         }*/
+
+        String[] arr = {"11","22"};
+        String string = JSON.toJSONString(arr);
+        System.out.println(string);
     }
 }

@@ -110,6 +110,9 @@ public interface Constants {
     //好券直播API
     String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
 
+    //物料精选API 综合类id 3756
+    String GET_MATERIAL_ITEM = TBK_URL2+"/getMaterialItem?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&materialid=3756&pageno=";
+
     //https://api.open.21ds.cn/apiv1/gettkmaterial?apkey=177982ef-f5bc-0b00-b2e9-2430763ffd67&adzoneid=1000&siteid=2000&tbname=xxxxx
     //获取全网淘客商品API
     //String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=pagenoText&sort=sortText&isoverseas=isoverseasText&istmall=istmallText&hascoupon=hascouponText";
@@ -139,6 +142,6 @@ public interface Constants {
     String URL_TYPE_MOBILE_SHARE_LINK = "m.tb.cn";
 
     //===================== 京东商品分享格式pattern ===================================================================
-    String JD_WEB_SHARE_URL = "item.jd.com";
-    String JD_MOBILE_SHARE_URL = "item.m.jd.com";
+    String JD_WEB_SHARE_URL = "/item.jd.com/";
+    String JD_MOBILE_SHARE_URL = "/item.m.jd.com/";
 }

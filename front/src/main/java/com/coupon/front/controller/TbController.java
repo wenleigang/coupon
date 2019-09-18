@@ -95,7 +95,8 @@ public class TbController {
     @ResponseBody
     public List<Map<String, Object>> goodsList(Integer pageNum) {
         try {
-            List<Map<String, Object>> list = miaoYouJuanService.getcouponrealtime(pageNum);
+            //List<Map<String, Object>> list = miaoYouJuanService.getcouponrealtime(pageNum);
+            List<Map<String, Object>> list = miaoYouJuanService.getMaterialItem(pageNum);
             return list;
         }catch (Exception e) {
             e.printStackTrace();

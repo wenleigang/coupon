@@ -29,6 +29,9 @@ public interface MiaoYouJuanService {
     //好券直播
     List<Map<String,Object>> getcouponrealtime(Integer pageNum) throws Exception;
 
+    //物料精选(综合类)
+    List<Map<String,Object>> getMaterialItem(Integer pageNum) throws Exception;
+
     //获取淘宝商品链接
     String goodsIdUrlLink(String textInfo) throws Exception;
 
