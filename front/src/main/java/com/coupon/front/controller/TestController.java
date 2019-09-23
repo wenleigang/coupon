@@ -237,9 +237,22 @@ public class TestController {
                 break;
             }
         }*/
-
-        String[] arr = {"11","22"};
-        String string = JSON.toJSONString(arr);
-        System.out.println(string);
+        List<Double> list = new ArrayList<>();
+        list.add(0.0);
+        list.add(1d);
+        list.add(4d);
+        list.add(0d);
+        list.add(2d);
+        list.add(0d);
+        Iterator<Double> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Double next = iterator.next();
+            if(next == 0) {
+                iterator.remove();
+            }
+        }
+        for (Double integer : list) {
+            System.out.println(integer);
+        }
     }
 }

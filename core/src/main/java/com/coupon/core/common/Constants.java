@@ -102,13 +102,13 @@ public interface Constants {
     String GY_ITEMID = TBK_URL2+"/getitemgyurl?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&itemid=";
 
     //获取简版淘客商品信息API
-    String ITEM_INFO = TBK_URL+"/getiteminfo?apkey="+MYJ_APKEY+"&itemid=";
+    String ITEM_INFO = TBK_URL2+"/getiteminfo?apkey="+MYJ_APKEY+"&itemid=";
 
     //万能高佣转链API接口
     String GY_ALL = TBK_URL2+"/getgyurlbyall?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&shorturl=1&tpwd=1&content=";
 
     //好券直播API
-    String BEST_COUPON_INFO_LIVE = TBK_URL + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
+    String BEST_COUPON_INFO_LIVE = TBK_URL2 + "/getcouponrealtime?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&pageno=";
 
     //物料精选API 综合类id 3756
     String GET_MATERIAL_ITEM = TBK_URL2+"/getMaterialItem?apkey="+MYJ_APKEY+"&pid="+PID+"&tbname="+TBNAME+"&materialid=3756&pageno=";
@@ -116,7 +116,7 @@ public interface Constants {
     //https://api.open.21ds.cn/apiv1/gettkmaterial?apkey=177982ef-f5bc-0b00-b2e9-2430763ffd67&adzoneid=1000&siteid=2000&tbname=xxxxx
     //获取全网淘客商品API
     //String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=pagenoText&sort=sortText&isoverseas=isoverseasText&istmall=istmallText&hascoupon=hascouponText";
-    String TK_MATERIAL = TBK_URL + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=";
+    String TK_MATERIAL = TBK_URL2 + "/gettkmaterial?apkey="+MYJ_APKEY+"&adzoneid="+PID_3+"&siteid="+PID_2+"&tbname="+TBNAME+"&keyword=keywordText&pageno=";
 
     //(新版京东)京东商品查询API
     String JD_ITEM_INFO = "https://api.open.21ds.cn/jd_api_v1/getjdunionitems?apkey="+MYJ_APKEY+"&skuIds=";
