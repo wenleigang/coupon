@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.*;
 
 /**
@@ -143,8 +150,39 @@ public class TestController {
         }
     }
 
+    enum Day {
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    }
 
     public static void main(String[] args) {
+        String ipAddress = "192.168.0.157";
+        Integer port = 54321;
+        boolean isReachable = false;
+        Socket connect = new Socket();
+        try {
+            InetSocketAddress endpointSocketAddr = new InetSocketAddress(ipAddress, port);
+            //此处3000是超时时间,单位 毫秒
+            connect.connect(endpointSocketAddr);
+            isReachable = connect.isConnected();
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + ", ip = " + ipAddress + ", port = " +port);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage() + ", ip = " + ipAddress + ", port = " +port);
+                }
+            }
+        }
+        if(isReachable) {
+            System.out.println("网络链接通畅");
+        }else {
+            System.out.println("网络链接阻塞");
+        }
+
+        /*Day day = Day.SUNDAY;
+        System.out.println(day.name()+"--"+day.ordinal());*/
         /*String textInfo8 = "【40个加粗衣架浸塑料成人防滑晾挂钩衣架子批发家用无痕衣撑衣服架】https://m.tb.cn/h.eTAIdtt?sm=6386f6 点击链接，再选择浏览器咑閞；或復·制这段描述€HNQQYT8LvGh€后到淘♂寳♀";
         String text = "【红蜻蜓男鞋官方旗舰店男士皮鞋英伦风潮流商务正装真皮耐磨皮鞋子】\n" +
                 "【原价/现价】579元/299元\n" +
@@ -237,7 +275,7 @@ public class TestController {
                 break;
             }
         }*/
-        List<Double> list = new ArrayList<>();
+        /*List<Double> list = new ArrayList<>();
         list.add(0.0);
         list.add(1d);
         list.add(4d);
@@ -253,6 +291,6 @@ public class TestController {
         }
         for (Double integer : list) {
             System.out.println(integer);
-        }
+        }*/
     }
 }
