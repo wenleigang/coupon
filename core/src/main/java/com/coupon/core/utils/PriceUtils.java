@@ -77,7 +77,7 @@ public class PriceUtils {
          * 返利用户规则;
          * 所得佣金都需要乘0.8的系数,因为淘宝会抽成技术服务费以及个税等;
          * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 0.90;
-         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.80;
+         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.75;
          * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.70;
          * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.60;
          * 【5】 所得返利 > 50.00元, 返利系数 0.50;
@@ -93,7 +93,7 @@ public class PriceUtils {
         }
         //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
         if(customPrice.compareTo(ONE_RATIO) > 0 && customPrice.compareTo(FIVE_RATIO) <= 0) {
-            rebatePrice = customPrice.multiply(ZERO_EIGHT_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = customPrice.multiply(ZERO_SEVEN_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.85;
         if(customPrice.compareTo(FIVE_RATIO) > 0 && customPrice.compareTo(TWENTY_RATIO) <= 0) {
@@ -137,7 +137,7 @@ public class PriceUtils {
         /**
          * 返利用户规则;
          * 【1】 1.0元 >= 所得返利 > 0元, 返利系数 0.90;
-         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.80;
+         * 【2】 5.00元 >= 所得返利 > 1.00元, 返利系数 0.75;
          * 【3】 20.00元 >= 所得返利 > 5.00元, 返利系数 0.70;
          * 【4】 50.00元 >= 所得返利 > 20.00元, 返利系数 0.60;
          * 【5】 所得返利 > 50.00元, 返利系数 0.50;
@@ -149,7 +149,7 @@ public class PriceUtils {
         }
         //【2】5.00元 >= 所得返利 > 1.00元, 返利系数 0.9;
         if(finalCommission.compareTo(ONE_RATIO) > 0 && finalCommission.compareTo(FIVE_RATIO) <= 0) {
-            rebatePrice = finalCommission.multiply(ZERO_EIGHT_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            rebatePrice = finalCommission.multiply(ZERO_SEVEN_FIVE_RATIO).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
         //【3】20.00元 >= 所得返利 > 5.00元, 返利系数 0.8;
         if(finalCommission.compareTo(FIVE_RATIO) > 0 && finalCommission.compareTo(TWENTY_RATIO) <= 0) {
