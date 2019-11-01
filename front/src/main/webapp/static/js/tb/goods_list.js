@@ -47,7 +47,7 @@ function initData(pageno) {
     /*获取搜索框文字*/
     var text = $("#keyword").val();//获取搜索框输入的文字
     if(text == undefined || text == "") {//如果第一次进来或者未输入任何文字
-        text = ".";
+        text = "food";
     }
     //组装其他查询条件
     var defaultTag = $("#item_default").attr("value");
