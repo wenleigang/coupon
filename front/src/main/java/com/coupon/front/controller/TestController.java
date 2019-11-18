@@ -155,7 +155,7 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        String ipAddress = "192.168.0.157";
+        /*String ipAddress = "192.168.0.157";
         Integer port = 54321;
         boolean isReachable = false;
         Socket connect = new Socket();
@@ -179,7 +179,7 @@ public class TestController {
             System.out.println("网络链接通畅");
         }else {
             System.out.println("网络链接阻塞");
-        }
+        }*/
 
         /*Day day = Day.SUNDAY;
         System.out.println(day.name()+"--"+day.ordinal());*/
@@ -243,6 +243,10 @@ public class TestController {
         String s2 = TbkUtils.extractTbCode(textInfo2);
         System.err.println(s1);
         System.err.println(s2);*/
+        String str= "：zhibei2\n" +
+                "密码 &EZ13524678&";
+        String s1 = TbkUtils.extractTbCode(str);
+        System.err.println(s1);
         /*String text1 = "https://item.jd.com/44076405945.html#none";
         String text2 = "https://item.m.jd.com/product/51138623981.html?wxa_abtest=o&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share";*/
 

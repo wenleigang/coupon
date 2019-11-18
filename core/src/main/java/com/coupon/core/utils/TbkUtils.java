@@ -120,7 +120,10 @@ public class TbkUtils {
                 for (String s : split) {
                     boolean code = isCode(s);
                     if(code) {
-                        return charStr+s+charStr;
+                        String str = charStr+s+charStr;
+                        if(textInfo.contains(str) && !isThisChar(charStr)) {
+                            return str;
+                        }
                     }
                 }
             }
@@ -143,6 +146,16 @@ public class TbkUtils {
                 || text.contains(Constants.URL_TYPE_LONG_SHORT_LINK) ||text.contains(Constants.URL_TYPE_MOBILE_SHARE_LINK)
                 || text.contains(Constants.URL_TYPE_TMALL_CAT_LINK) ||text.contains(Constants.URL_TYPE_TWO_ONE_LINK)) {
             return true;
+        }
+        return false;
+    }
+
+    public static boolean isThisChar(String text) {
+        String[] arr = {"!", "#", "%", "^", "*", "(", ")", "{", "}", "[", "]", ":", "：", ";", "；", "“", "‘", "”", "’", "~", "·", "`", "。", ".", "\\", "/", "?"};
+        for (String s : arr) {
+            if(text.equals(s)) {
+                return true;
+            }
         }
         return false;
     }
