@@ -45,7 +45,7 @@
         <jackson.version>2.9.2</jackson.version>
         <jackson.module.version>2.9.2</jackson.module.version>
         <sitemesh.version>3.0.1</sitemesh.version>
-        <xstream.version>1.4.10</xstream.version>
+        <xstream.version>1.4.18</xstream.version>
         <pagehelper.version>4.2.1</pagehelper.version>
         <javax.mail.version>1.6.0</javax.mail.version>
         <guava.version>18.0</guava.version>
