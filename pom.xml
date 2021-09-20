@@ -40,7 +40,7 @@
         <logback-classic.version>1.2.3</logback-classic.version>
         <logback-core.version>1.2.3</logback-core.version>
         <logback-ext-spring.version>0.1.4</logback-ext-spring.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.8.0</shiro.version>
         <fastjson.version>1.2.40</fastjson.version>
         <jackson.version>2.9.2</jackson.version>
         <jackson.module.version>2.9.2</jackson.module.version>
